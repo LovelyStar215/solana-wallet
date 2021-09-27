@@ -13,7 +13,7 @@ const CreateAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Button style={{borderRadius: '5px'}}>
+        <Button type="primary">
           Create New Wallet
         </Button>
       </div>
