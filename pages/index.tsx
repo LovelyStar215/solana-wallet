@@ -21,12 +21,15 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <title>Wallet Tutorial</title>
-        <meta name="description" content="Solana wallet tutorial by Figment Learn" />
+        <meta
+          name="description"
+          content="Solana wallet tutorial by Figment Learn"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-      {/* Consider abstracting into separate header component */}
+        {/* Consider abstracting into separate header component */}
         <header className={styles.header}>
           <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
           <Dropdown className={styles.top} overlay={menu}>
@@ -40,14 +43,23 @@ const Home: NextPage = () => {
         </header>
 
         <h1 className={styles.title}>
-          A basic, non-custodial crypto wallet for storing <a href="https://solana.com/">Solana</a> digital assets.
+          A basic, non-custodial crypto wallet for storing{" "}
+          <a href="https://solana.com/">Solana</a> digital assets.
         </h1>
 
-        {/* Insert container for two main boxes */}
         <div className={styles.grid}>
           <CreateAccount></CreateAccount>
           <RestoreAccount></RestoreAccount>
         </div>
+
+        <footer className={styles.footerHome}>
+          <p>
+            MyWallet tutorial created by{" "}
+            <a className={styles.footerLink} href="https://learn.figment.io/">
+              Figment Learn
+            </a>
+          </p>
+        </footer>
       </main>
     </div>
   );
