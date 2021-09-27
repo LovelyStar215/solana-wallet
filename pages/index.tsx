@@ -1,19 +1,31 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Menu, Dropdown } from "antd";
+import { Menu, Dropdown, Badge } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import CreateAccount from "../components/CreateAccount";
 import RestoreAccount from "../components/RestoreAccount";
+import { useState } from "react";
 
 const Home: NextPage = () => {
-  const onChange = () => {};
+  const [network, setNetwork] = useState<string>("Devnet");
+
+  const selectNetwork = (e: any) => {
+    const text = e.domEvent.target.innerText.trim();
+    setNetwork(text);
+  };
 
   const menu = (
     <Menu>
-      <Menu.Item>Mainnet</Menu.Item>
-      <Menu.Item>Devnet</Menu.Item>
-      <Menu.Item>Testnet</Menu.Item>
+      <Menu.Item onClick={selectNetwork}>
+        Mainnet {network === "Mainnet" && <Badge status="processing" />}
+      </Menu.Item>
+      <Menu.Item onClick={selectNetwork}>
+        Devnet {network === "Devnet" && <Badge status="processing" />}
+      </Menu.Item>
+      <Menu.Item onClick={selectNetwork}>
+        Testnet {network === "Testnet" && <Badge status="processing" />}
+      </Menu.Item>
     </Menu>
   );
 
