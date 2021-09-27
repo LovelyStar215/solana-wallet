@@ -3,6 +3,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import CreateAccount from "../components/CreateAccount";
 
 const Home: NextPage = () => {
   const onChange = () => {};
@@ -42,6 +43,9 @@ const Home: NextPage = () => {
         </h1>
 
         {/* Insert container for two main boxes */}
+        <div className={styles.grid}>
+          <CreateAccount></CreateAccount>
+        </div>
       </main>
     </div>
   );
