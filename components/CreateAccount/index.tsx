@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Keypair } from "@solana/web3.js";
 import styles from "../../styles/HomeBoxes.module.css";
 import { Button } from "antd";
+import Link from 'next/link'
 
 const CreateAccount = () => {
   const [keypair, setKeypair] = useState<Keypair | null>(null);
@@ -21,9 +22,11 @@ const CreateAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Button type="primary" onClick={handleCreate}>
-          Create New Wallet
-        </Button>
+        <Link href={`/wallet`} passHref>
+          <Button type="primary" onClick={handleCreate}>
+            Create New Wallet
+          </Button>
+        </Link>
       </div>
     </div>
   );

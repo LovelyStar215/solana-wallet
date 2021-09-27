@@ -5,11 +5,13 @@ import { Menu, Dropdown, Badge } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import CreateAccount from "../components/CreateAccount";
 import RestoreAccount from "../components/RestoreAccount";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Home: NextPage = () => {
   const [network, setNetwork] = useState<string>("Devnet");
 
+  // What type should e be here?
+  // Also check console warning
   const selectNetwork = (e: any) => {
     const text = e.domEvent.target.innerText.trim();
     setNetwork(text);
