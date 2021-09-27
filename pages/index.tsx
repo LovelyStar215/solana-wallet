@@ -43,7 +43,7 @@ const Home: NextPage = () => {
         </header>
 
         <h1 className={styles.title}>
-          A basic, non-custodial crypto wallet for storing{" "}
+          A simple, non-custodial crypto wallet for managing{" "}
           <a href="https://solana.com/">Solana</a> digital assets.
         </h1>
 
