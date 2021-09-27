@@ -24,6 +24,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+      {/* Consider abstracting into separate header component */}
         <header className={styles.header}>
           <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
           <Dropdown className={styles.top} overlay={menu}>
@@ -37,8 +38,10 @@ const Home: NextPage = () => {
         </header>
 
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          A basic, non-custodial crypto wallet for storing <a href="https://solana.com/">Solana</a> digital assets.
         </h1>
+
+        {/* Insert container for two main boxes */}
       </main>
     </div>
   );
