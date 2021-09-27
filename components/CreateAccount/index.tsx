@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { Keypair } from "@solana/web3.js";
 import styles from "../../styles/HomeBoxes.module.css";
-import { Button } from 'antd';
+import { Button } from "antd";
 
 const CreateAccount = () => {
+  const [keypair, setKeypair] = useState<Keypair | null>(null);
+
+  const handleCreate = () => {
+    const keypair = new Keypair();
+    setKeypair(keypair);
+  };
+
   return (
     <div className={`${styles.card} ${styles.create}`}>
       <header>
@@ -13,7 +21,7 @@ const CreateAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Button type="primary">
+        <Button type="primary" onClick={handleCreate}>
           Create New Wallet
         </Button>
       </div>
