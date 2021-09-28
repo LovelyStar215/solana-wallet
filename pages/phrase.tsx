@@ -4,16 +4,28 @@ import { Keypair } from "@solana/web3.js";
 import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
+import * as Bip39 from "bip39";
 
 const Phrase: NextPage = () => {
   const [keypair, setKeypair] = useState<Keypair | null>(null);
 
   useEffect(() => {
-    const account = new Keypair();
-    setKeypair(account);
-    console.log(account.publicKey.toBase58());
-    console.log(account.secretKey);
-  }, [])
+    // const account = new Keypair();
+    // setKeypair(account);
+    // console.log(account.publicKey.toBase58());
+    // console.log(account.secretKey);
+    const mnemonic = Bip39.generateMnemonic();
+    console.log(mnemonic);
+    Bip39.mnemonicToSeed(mnemonic)
+      .then((buffer) => {
+        const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
+        const account = Keypair.fromSeed(seed);
+        console.log(account)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
