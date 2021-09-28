@@ -44,7 +44,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
 
         {children}
 
-        <Divider />
+        <Divider style={{ marginTop: "3rem" }} />
 
         <footer className={styles.footerHome}>
           <p>
