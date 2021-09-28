@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ant-divider-horizontal {
+  width: 55%;
+  min-width: 800px;
+}
