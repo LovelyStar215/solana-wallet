@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import { Keypair } from "@solana/web3.js";
+import React from "react";
 import styles from "../../styles/HomeBoxes.module.css";
 import { Button } from "antd";
 import Link from "next/link";
 import { BankOutlined } from "@ant-design/icons";
 
 const CreateAccount = () => {
-  const [keypair, setKeypair] = useState<Keypair | null>(null);
-
-  const handleCreate = () => {
-    const keypair = new Keypair();
-    setKeypair(keypair);
-  };
-
   return (
     <div className={`${styles.card} ${styles.create}`}>
       <header>
@@ -26,8 +18,8 @@ const CreateAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Link href={`/wallet`} passHref>
-          <Button type="primary" onClick={handleCreate}>
+        <Link href={`/generate`} passHref>
+          <Button type="primary">
             Create New Wallet
           </Button>
         </Link>
