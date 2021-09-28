@@ -1,10 +1,10 @@
-import { Badge, Dropdown, Menu } from 'antd';
-import React, { useState } from 'react'
+import { Badge, Dropdown, Menu, Divider } from "antd";
+import React, { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 
 import styles from "./index.module.css";
 
-const Layout = ({ children }: {children: JSX.Element }) => {
+const Layout = ({ children }: { children: JSX.Element }) => {
   const [network, setNetwork] = useState<string>("Devnet");
 
   // What type should e be here?
@@ -44,6 +44,8 @@ const Layout = ({ children }: {children: JSX.Element }) => {
 
         {children}
 
+        <Divider />
+
         <footer className={styles.footerHome}>
           <p>
             MyWallet tutorial created by{" "}
@@ -55,6 +57,6 @@ const Layout = ({ children }: {children: JSX.Element }) => {
       </main>
     </div>
   );
-}
+};
 
-export default Layout
+export default Layout;
