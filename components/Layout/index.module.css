@@ -1,0 +1,41 @@
+.container {
+  min-height: 100vh;
+  padding: 0 4rem;
+  height: 100vh;
+}
+
+.main {
+  padding: 3rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid red; */
+  width: 100%;
+}
+
+.top {
+  /* border: 1px solid black; */
+  margin: auto 0;
+  padding: 0 1rem;
+  color: black;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.footerHome {
+  margin: 1rem 0;
+}
+
+.footerLink {
+  color: #999;
+}
