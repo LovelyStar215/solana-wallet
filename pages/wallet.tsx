@@ -1,11 +1,8 @@
-import Head from 'next/head'
+import { NextPage } from "next";
+import withPublicLayout from "../components/Layout/withPublicLayout";
 
-const Wallet = () => {
-  return (
-    <div>
-      Wallet
-    </div>
-  )
-}
+const Wallet: NextPage = () => {
+  return <div>Wallet</div>;
+};
 
-export default Wallet
+export default withPublicLayout(Wallet);
