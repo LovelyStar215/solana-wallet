@@ -1,11 +1,8 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Menu, Dropdown, Badge } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import CreateAccount from "../components/CreateAccount";
 import RestoreAccount from "../components/RestoreAccount";
-import React, { useState } from "react";
+import React from "react";
 import withPublicLayout from "../components/Layout/withPublicLayout";
 
 const Home: NextPage = () => {
