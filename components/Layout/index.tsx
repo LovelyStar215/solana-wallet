@@ -1,7 +1,7 @@
 import { Badge, Dropdown, Menu, Divider } from "antd";
 import React, { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
-
+import Link from "next/link";
 import styles from "./index.module.css";
 
 const Layout = ({ children }: { children: JSX.Element }) => {
@@ -31,7 +31,9 @@ const Layout = ({ children }: { children: JSX.Element }) => {
     <div className={styles.container}>
       <main className={styles.main}>
         <header className={styles.header}>
-          <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
+          <Link href={`/`} passHref>
+            <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
+          </Link>
           <Dropdown className={styles.top} overlay={menu}>
             <a
               className="ant-dropdown-link"
