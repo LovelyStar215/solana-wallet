@@ -8,6 +8,7 @@ import * as Bip39 from "bip39";
 import PhraseBox from "../components/PhraseBox";
 
 const Phrase: NextPage = () => {
+  // Replace this with global state since recover.tsx uses it also
   const [account, setAccount] = useState<Keypair | null>(null);
   const [mnemonic, setMnemonic] = useState<string>("");
 
