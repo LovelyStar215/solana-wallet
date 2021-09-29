@@ -5,22 +5,23 @@ import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
 import * as Bip39 from "bip39";
+import PhraseBox from "../components/PhraseBox";
 
 const Phrase: NextPage = () => {
-  const [keypair, setKeypair] = useState<Keypair | null>(null);
+  const [account, setAccount] = useState<Keypair | null>(null);
+  const [mnemonic, setMnemonic] = useState<string>("");
 
   useEffect(() => {
-    // const account = new Keypair();
-    // setKeypair(account);
-    // console.log(account.publicKey.toBase58());
-    // console.log(account.secretKey);
-    const mnemonic = Bip39.generateMnemonic();
+    // const mnemonic = Bip39.generateMnemonic();
+    const mnemonic = "image birth recipe fade maximum maximum rifle pledge there forward subway pistol"
+    setMnemonic(mnemonic);
     console.log(mnemonic);
     Bip39.mnemonicToSeed(mnemonic)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
-        const account = Keypair.fromSeed(seed);
-        console.log(account)
+        // const account = Keypair.fromSeed(seed);
+        // setAccount(account);
+        // console.log(account);
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +43,7 @@ const Phrase: NextPage = () => {
         of it as the password to your online bank account.
       </p>
 
-      <div className={styles.grid}>Phrase</div>
+      <PhraseBox mnemonic={mnemonic}></PhraseBox>
 
       <p>
         Once you have stored this phrase somewhere safe, click finish to go to
