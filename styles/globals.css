@@ -19,3 +19,7 @@ a {
   width: 55%;
   min-width: 800px;
 }
+
+.ant-dropdown-link:hover {
+  color: #0070f3;
+}
