@@ -14,14 +14,13 @@
 }
 
 .header {
+  max-width: 1000px;
   display: flex;
-  justify-content: space-around;
-  /* border: 1px solid red; */
+  justify-content: space-between;
   width: 100%;
 }
 
 .top {
-  /* border: 1px solid black; */
   margin: auto 0;
   padding: 0 1rem;
   color: black;
@@ -30,6 +29,11 @@
 .logo {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.logo:hover {
+  cursor: pointer;
+  color: #0070f3;
 }
 
 .footerHome {
