@@ -12,16 +12,16 @@ const Phrase: NextPage = () => {
   const [mnemonic, setMnemonic] = useState<string>("");
 
   useEffect(() => {
-    // const mnemonic = Bip39.generateMnemonic();
-    const mnemonic = "image birth recipe fade maximum maximum rifle pledge there forward subway pistol"
+    const mnemonic = Bip39.generateMnemonic();
+    // const mnemonic = "image birth recipe fade maximum maximum rifle pledge there forward subway pistol"
     setMnemonic(mnemonic);
     console.log(mnemonic);
     Bip39.mnemonicToSeed(mnemonic)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
-        // const account = Keypair.fromSeed(seed);
-        // setAccount(account);
-        // console.log(account);
+        const account = Keypair.fromSeed(seed);
+        setAccount(account);
+        console.log(account);
       })
       .catch((err) => {
         console.log(err);

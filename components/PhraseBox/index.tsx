@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/Phrase.module.css";
-import { notification } from 'antd';
+import { notification, Tooltip } from 'antd';
 
 
 const PhraseBox = ({ mnemonic }) => {
@@ -16,9 +16,11 @@ const PhraseBox = ({ mnemonic }) => {
   };
 
   return (
-    <div className={styles.box} id="mnemonic" onClick={copyMnemonic}>
-      {mnemonic}
-    </div>
+    <Tooltip title="click to copy">
+      <div className={styles.box} id="mnemonic" onClick={copyMnemonic}>
+        {mnemonic}
+      </div>
+    </Tooltip>
   );
 };
 
