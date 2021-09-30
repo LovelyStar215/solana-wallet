@@ -1,12 +1,6 @@
 import { createContext, useContext } from "react";
 import { Keypair } from "@solana/web3.js";
 
-export type GlobalState = {
-  network: string;
-  account?: Keypair;
-  mnemonic?: string;
-};
-
 export type GlobalContextType = {
   network: string;
   account: Keypair | null;
