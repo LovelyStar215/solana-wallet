@@ -1,5 +1,23 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
+import { Keypair } from "@solana/web3.js";
 
-const AccountContext = createContext({});
+export type GlobalState = {
+  network: string;
+  account?: Keypair;
+  mnemonic?: string;
+};
 
-export { AccountContext };
+export type GlobalContextType = {
+  account: Keypair | null;
+  setAccount: (account: Keypair | null) => void;
+  mnemonic: string;
+  setMnemonic: (mnemonic: string) => void;
+};
+
+export const GlobalContext = createContext<GlobalContextType>({
+  account: null,
+  setAccount: () => null,
+  mnemonic: "",
+  setMnemonic: () => null,
+});
+export const useGlobalState = () => useContext(GlobalContext);
