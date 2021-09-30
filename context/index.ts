@@ -8,6 +8,7 @@ export type GlobalState = {
 };
 
 export type GlobalContextType = {
+  network: string;
   account: Keypair | null;
   setAccount: (account: Keypair | null) => void;
   mnemonic: string;
@@ -15,6 +16,7 @@ export type GlobalContextType = {
 };
 
 export const GlobalContext = createContext<GlobalContextType>({
+  network: "Devnet",
   account: null,
   setAccount: () => null,
   mnemonic: "",

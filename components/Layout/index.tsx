@@ -8,11 +8,10 @@ import { GlobalContext } from "../../context";
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   const [network, setNetwork] = useState<string>("Devnet");
-
   const [account, setAccount] = useState<Keypair | null>(null);
   const [mnemonic, setMnemonic] = useState<string>("");
 
-  // What type should e be here?
+  // What type should `e` be here?
   const selectNetwork = (e: any) => {
     const text = e.domEvent.target.innerText.trim();
     setNetwork(text);
@@ -33,7 +32,7 @@ const Layout = ({ children }: { children: JSX.Element }) => {
   );
 
   return (
-    <GlobalContext.Provider value={{ account, setAccount, mnemonic, setMnemonic }}>
+    <GlobalContext.Provider value={{ network, account, setAccount, mnemonic, setMnemonic }}>
       <div className={styles.container}>
         <main className={styles.main}>
           <header className={styles.header}>

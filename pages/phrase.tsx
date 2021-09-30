@@ -9,19 +9,17 @@ import PhraseBox from "../components/PhraseBox";
 import { GlobalContext } from "../context"
 
 const Phrase: NextPage = () => {
-  const {account, setAccount, mnemonic, setMnemonic} =
+  const {setAccount, mnemonic, setMnemonic} =
     useContext(GlobalContext);
 
   useEffect(() => {
-    const mnemonic = Bip39.generateMnemonic();
-    setMnemonic(mnemonic);
-    console.log(mnemonic);
-    Bip39.mnemonicToSeed(mnemonic)
+    const generatedMnemonic = Bip39.generateMnemonic();
+    setMnemonic(generatedMnemonic);
+    Bip39.mnemonicToSeed(generatedMnemonic)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
         const account = Keypair.fromSeed(seed);
         setAccount(account);
-        console.log(account);
       })
       .catch((err) => {
         console.log(err);

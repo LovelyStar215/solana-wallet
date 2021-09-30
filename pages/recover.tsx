@@ -10,7 +10,7 @@ import { GlobalContext } from "../context"
 const Recover: NextPage = () => {
   const [form] = Form.useForm();
 
-  const {account, setAccount, mnemonic, setMnemonic} =
+  const {setAccount, setMnemonic} =
     useContext(GlobalContext);
 
   const handleImport = async (values: any) => {
