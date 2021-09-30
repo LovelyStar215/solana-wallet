@@ -39,7 +39,8 @@ const Layout = ({ children }: { children: JSX.Element }) => {
             <Link href={`/`} passHref>
               <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
             </Link>
-            <Dropdown className={styles.top} overlay={menu}>
+
+            <Dropdown className={styles.top} overlay={menu} disabled={!account}>
               <a
                 className="ant-dropdown-link"
                 onClick={(e) => e.preventDefault()}
