@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { NextPage } from "next";
 import { Keypair } from "@solana/web3.js";
 import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import * as Bip39 from "bip39";
 import { Form, Input, Button } from "antd";
+import { GlobalContext } from "../context"
 
 const Recover: NextPage = () => {
   const [form] = Form.useForm();
 
-  // Replace this with global state since phrase.tsx uses it also
-  const [account, setAccount] = useState<Keypair | null>(null);
+  const {account, setAccount, mnemonic, setMnemonic} =
+    useContext(GlobalContext);
 
   const handleImport = async (values: any) => {
+    setMnemonic(values.phrase)
     Bip39.mnemonicToSeed(values.phrase)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
-        const account = Keypair.fromSeed(seed);
-        setAccount(account);
-        console.log(account);
+        const importedAccount = Keypair.fromSeed(seed);
+        setAccount(importedAccount);
       })
       .catch((err) => {
         console.log(err);

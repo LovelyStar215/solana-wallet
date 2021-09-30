@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
 import { Keypair } from "@solana/web3.js";
 import withPublicLayout from "../components/Layout/withPublicLayout";
@@ -6,15 +6,14 @@ import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
 import * as Bip39 from "bip39";
 import PhraseBox from "../components/PhraseBox";
+import { GlobalContext } from "../context"
 
 const Phrase: NextPage = () => {
-  // Replace this with global state since recover.tsx uses it also
-  const [account, setAccount] = useState<Keypair | null>(null);
-  const [mnemonic, setMnemonic] = useState<string>("");
+  const {account, setAccount, mnemonic, setMnemonic} =
+    useContext(GlobalContext);
 
   useEffect(() => {
     const mnemonic = Bip39.generateMnemonic();
-    // const mnemonic = "image birth recipe fade maximum maximum rifle pledge there forward subway pistol"
     setMnemonic(mnemonic);
     console.log(mnemonic);
     Bip39.mnemonicToSeed(mnemonic)
