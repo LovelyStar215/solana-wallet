@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
+import { useRouter } from 'next/router'
 import { Keypair } from "@solana/web3.js";
 import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
@@ -9,8 +10,9 @@ import { GlobalContext } from "../context"
 
 const Recover: NextPage = () => {
   const [form] = Form.useForm();
+  const router = useRouter()
 
-  const {setAccount, setMnemonic} =
+  const {account, setAccount, setMnemonic} =
     useContext(GlobalContext);
 
   const handleImport = async (values: any) => {
@@ -25,6 +27,13 @@ const Recover: NextPage = () => {
         console.log(err);
       });
   }
+
+  useEffect(() => {
+    console.log("account at import:", account)
+    if (account) {
+      router.push('/wallet')
+    }
+  }, [account])
 
   return (
     <>
@@ -43,7 +52,20 @@ const Recover: NextPage = () => {
           <Form.Item
             name="phrase"
             label="Secret Recovery Phrase"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+                message: 'Please enter your recovery phrase',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (value.trim().split(" ").length === 12) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Recovery phrase must be 12 words long'));
+                },
+              }),
+            ]}
           >
             <Input
               placeholder="Paste secret recovery phrase from clipboard"
