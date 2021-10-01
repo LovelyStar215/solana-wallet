@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 import { GlobalContext } from "../../context";
 
 const Layout = ({ children }: { children: JSX.Element }) => {
-  const { network, setNetwork, account, setAccount, mnemonic, setMnemonic } =
+  const { network, setNetwork, account } =
     useContext(GlobalContext);
 
   // What type should `e` be here?
