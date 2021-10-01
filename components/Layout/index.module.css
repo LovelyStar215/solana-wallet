@@ -36,6 +36,11 @@
   color: #0070f3;
 }
 
+.nav {
+  width: 100%;
+  justify-content: right;
+}
+
 .footerHome {
   margin: 1rem 0;
 }

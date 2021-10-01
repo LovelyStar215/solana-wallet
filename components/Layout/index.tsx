@@ -1,13 +1,15 @@
 import { Badge, Dropdown, Menu, Divider } from "antd";
 import React, { useContext } from "react";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./index.module.css";
 import { GlobalContext } from "../../context";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }: { children: JSX.Element }) => {
-  const { network, setNetwork, account } =
-    useContext(GlobalContext);
+  const { network, setNetwork, account } = useContext(GlobalContext);
+
+  const router = useRouter();
 
   // What type should `e` be here?
   const selectNetwork = (e: any) => {
@@ -37,14 +39,23 @@ const Layout = ({ children }: { children: JSX.Element }) => {
             <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
           </Link>
 
-          <Dropdown className={styles.top} overlay={menu} disabled={!account}>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              Network <DownOutlined />
-            </a>
-          </Dropdown>
+          <Menu mode="horizontal" className={styles.nav} selectedKeys={[router.pathname]}>
+            {account && (
+              <Menu.Item key="/wallet" icon={<UserOutlined />}>
+                <Link href="/wallet" passHref>
+                  Wallet
+                </Link>
+              </Menu.Item>
+            )}
+            <Dropdown className={styles.top} overlay={menu} disabled={!account}>
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+              >
+                Network <DownOutlined />
+              </a>
+            </Dropdown>
+          </Menu>
         </header>
 
         {children}
