@@ -1,23 +1,23 @@
 import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { Keypair } from "@solana/web3.js";
 import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import * as Bip39 from "bip39";
 import { Form, Input, Button } from "antd";
-import { GlobalContext } from "../context"
+import { GlobalContext } from "../context";
 
 const Recover: NextPage = () => {
   const [form] = Form.useForm();
-  const router = useRouter()
+  const router = useRouter();
 
-  const {account, setAccount, setMnemonic} =
-    useContext(GlobalContext);
+  const { account, setAccount, setMnemonic } = useContext(GlobalContext);
 
   const handleImport = async (values: any) => {
-    setMnemonic(values.phrase)
-    Bip39.mnemonicToSeed(values.phrase)
+    const inputMnemonic = values.phrase.trim().toLowerCase();
+    setMnemonic(inputMnemonic);
+    Bip39.mnemonicToSeed(inputMnemonic)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
         const importedAccount = Keypair.fromSeed(seed);
@@ -26,14 +26,14 @@ const Recover: NextPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   useEffect(() => {
-    console.log("account at import:", account)
+    console.log("account at import:", account);
     if (account) {
-      router.push('/wallet')
+      router.push("/wallet");
     }
-  }, [account])
+  }, [account]);
 
   return (
     <>
@@ -55,16 +55,18 @@ const Recover: NextPage = () => {
             rules={[
               {
                 required: true,
-                message: 'Please enter your recovery phrase',
+                message: "Please enter your recovery phrase",
               },
-              ({ getFieldValue }) => ({
+              {
                 validator(_, value) {
                   if (value.trim().split(" ").length === 12) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Recovery phrase must be 12 words long'));
+                  return Promise.reject(
+                    new Error("Recovery phrase must be 12 words long")
+                  );
                 },
-              }),
+              },
             ]}
           >
             <Input
