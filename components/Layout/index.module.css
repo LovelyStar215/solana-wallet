@@ -41,6 +41,15 @@
   justify-content: right;
 }
 
+a.back {
+  color: #aaa;
+  margin-top: 2rem;
+}
+
+a.back:hover {
+  color: #0070f3;
+}
+
 .footerHome {
   margin: 1rem 0;
 }

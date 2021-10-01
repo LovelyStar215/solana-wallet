@@ -1,6 +1,10 @@
 import { Badge, Dropdown, Menu, Divider } from "antd";
 import React, { useContext } from "react";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  UserOutlined,
+  ArrowLeftOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./index.module.css";
 import { GlobalContext } from "../../context";
@@ -39,7 +43,11 @@ const Layout = ({ children }: { children: JSX.Element }) => {
             <div className={`${styles.top} ${styles.logo}`}>MyWallet</div>
           </Link>
 
-          <Menu mode="horizontal" className={styles.nav} selectedKeys={[router.pathname]}>
+          <Menu
+            mode="horizontal"
+            className={styles.nav}
+            selectedKeys={[router.pathname]}
+          >
             {account && (
               <Menu.Item key="/wallet" icon={<UserOutlined />}>
                 <Link href="/wallet" passHref>
@@ -59,6 +67,14 @@ const Layout = ({ children }: { children: JSX.Element }) => {
         </header>
 
         {children}
+
+        {router.pathname !== "/" && (
+          <Link href="/" passHref>
+            <a className={styles.back}>
+              <ArrowLeftOutlined /> Back Home
+            </a>
+          </Link>
+        )}
 
         <Divider style={{ marginTop: "3rem" }} />
 
