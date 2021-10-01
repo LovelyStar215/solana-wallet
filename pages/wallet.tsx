@@ -4,7 +4,7 @@ import { Button } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
-import { route } from "next/dist/server/router";
+import styles from "../styles/Wallet.module.css";
 
 const Wallet: NextPage = () => {
   const { network, account } = useContext(GlobalContext);
@@ -20,7 +20,7 @@ const Wallet: NextPage = () => {
   return (
     <>
       {account && (
-        <div>
+        <div className={styles.wallet}>
           <h1>Account Dashboard</h1>
           <p>Connected to {network}</p>
           <p>Account: {account?.publicKey.toString()}</p>
