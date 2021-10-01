@@ -28,11 +28,10 @@ const Recover: NextPage = () => {
   };
 
   useEffect(() => {
-    console.log("account at import:", account);
     if (account) {
       router.push("/wallet");
     }
-  }, [account]);
+  }, [account, router]);
 
   return (
     <>
