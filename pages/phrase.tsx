@@ -5,11 +5,11 @@ import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
 import * as Bip39 from "bip39";
 import PhraseBox from "../components/PhraseBox";
-import { GlobalContext } from "../context"
+import { GlobalContext } from "../context";
+import Link from "next/link";
 
 const Phrase: NextPage = () => {
-  const {setAccount, mnemonic, setMnemonic} =
-    useContext(GlobalContext);
+  const { setAccount, mnemonic, setMnemonic } = useContext(GlobalContext);
 
   useEffect(() => {
     const generatedMnemonic = Bip39.generateMnemonic();
@@ -17,8 +17,8 @@ const Phrase: NextPage = () => {
     Bip39.mnemonicToSeed(generatedMnemonic)
       .then((buffer) => {
         const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
-        const account = Keypair.fromSeed(seed);
-        setAccount(account);
+        const newAccount = Keypair.fromSeed(seed);
+        setAccount(newAccount);
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +47,9 @@ const Phrase: NextPage = () => {
         your wallet.
       </p>
 
-      <Button type="primary">Finish</Button>
+      <Link href={`/wallet`} passHref>
+        <Button type="primary">Finish</Button>
+      </Link>
     </>
   );
 };
