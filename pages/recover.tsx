@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Keypair } from "@solana/web3.js";
-import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import * as Bip39 from "bip39";
 import { Form, Input, Button } from "antd";
@@ -94,4 +93,4 @@ const Recover: NextPage = () => {
   );
 };
 
-export default withPublicLayout(Recover);
+export default Recover;

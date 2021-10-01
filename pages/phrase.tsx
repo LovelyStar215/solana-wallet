@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { NextPage } from "next";
 import { Keypair } from "@solana/web3.js";
-import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
 import * as Bip39 from "bip39";
@@ -53,4 +52,4 @@ const Phrase: NextPage = () => {
   );
 };
 
-export default withPublicLayout(Phrase);
+export default Phrase;

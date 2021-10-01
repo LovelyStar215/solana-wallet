@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import withPublicLayout from "../components/Layout/withPublicLayout";
 import styles from "../styles/Phrase.module.css";
 import { Button } from "antd";
 import Link from "next/link";
@@ -18,4 +17,4 @@ const Phrase: NextPage = () => {
   );
 };
 
-export default withPublicLayout(Phrase);
+export default Phrase;

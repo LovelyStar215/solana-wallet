@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css";
 import CreateAccount from "../components/CreateAccount";
 import RestoreAccount from "../components/RestoreAccount";
 import React from "react";
-import withPublicLayout from "../components/Layout/withPublicLayout";
 
 const Home: NextPage = () => {
   return (
@@ -21,4 +20,4 @@ const Home: NextPage = () => {
   )
 };
 
-export default withPublicLayout(Home);
+export default Home;
