@@ -8,9 +8,7 @@ import TransactionModal from "../components/TransactionModal";
 import {
   Connection,
   clusterApiUrl,
-  PublicKey,
   LAMPORTS_PER_SOL,
-  Cluster,
 } from "@solana/web3.js";
 
 const Wallet: NextPage = () => {
@@ -22,11 +20,8 @@ const Wallet: NextPage = () => {
     if (!account) {
       router.push("/");
     }
-  }, [account, router]);
-
-  // useEffect(() => {
-  //   console.log("Hello, the network changed!")
-  // }, [network])
+    refreshBalance();
+  }, [account, router, network]);
 
   const handleAirdrop = async () => {
     try {
@@ -37,9 +32,17 @@ const Wallet: NextPage = () => {
         LAMPORTS_PER_SOL
       );
       await connection.confirmTransaction(transaction);
+      refreshBalance();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const refreshBalance = async () => {
+    const connection = new Connection(clusterApiUrl(network), "confirmed");
+    const publicKey = account?.publicKey;
+    const balance = await connection.getBalance(publicKey);
+    setBalance(balance / LAMPORTS_PER_SOL);
   };
 
   return (
@@ -47,13 +50,13 @@ const Wallet: NextPage = () => {
       {account && (
         <div className={styles.wallet}>
           <h1>Account Dashboard</h1>
-          <p>Connected to {
-              network === "mainnet-beta" ?
-                network.charAt(0).toUpperCase() + network.slice(1,7) :
-                network.charAt(0).toUpperCase() + network.slice(1)
-            }
-          </p>
           <p>Account: {account?.publicKey.toString()}</p>
+          <p>
+            Connected to{" "}
+            {network === "mainnet-beta"
+              ? network.charAt(0).toUpperCase() + network.slice(1, 7)
+              : network.charAt(0).toUpperCase() + network.slice(1)}
+          </p>
           <h2>
             {balance} <span>SOL</span>
           </h2>
