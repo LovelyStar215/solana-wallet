@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { NextPage } from "next";
 import { Button } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
+import TransactionModal from "../components/TransactionModal";
 
 const Wallet: NextPage = () => {
   const { network, account } = useContext(GlobalContext);
@@ -27,9 +27,7 @@ const Wallet: NextPage = () => {
           <h2>
             0 <span>SOL</span>
           </h2>
-          <Button type="primary">
-            Send <ArrowRightOutlined />
-          </Button>
+          <TransactionModal />
         </div>
       )}
       {/* Maybe make the airdrop link dependent on whether there are funds in the account already? */}
