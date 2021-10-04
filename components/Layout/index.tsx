@@ -17,8 +17,12 @@ const Layout = ({ children }: { children: JSX.Element }) => {
 
   // What type should `e` be here?
   const selectNetwork = (e: any) => {
-    const text = e.domEvent.target.innerText.trim();
-    setNetwork(text);
+    const text = e.domEvent.target.innerText.trim().toLowerCase();
+    if (text === "mainnet") {
+      setNetwork("mainnet-beta");
+    } else {
+      setNetwork(text);
+    }
   };
 
   const menu = (
