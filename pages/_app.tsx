@@ -7,7 +7,7 @@ import { GlobalContext } from "../context";
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [network, setNetwork] = useState<string>("Devnet");
+  const [network, setNetwork] = useState<string>("devnet");
   const [account, setAccount] = useState<Keypair | null>(null);
   const [mnemonic, setMnemonic] = useState<string>("");
 

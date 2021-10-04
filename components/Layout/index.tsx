@@ -24,13 +24,13 @@ const Layout = ({ children }: { children: JSX.Element }) => {
   const menu = (
     <Menu>
       <Menu.Item onClick={selectNetwork} key="1">
-        Mainnet {network === "Mainnet" && <Badge status="processing" />}
+        Mainnet {network === "mainnet-beta" && <Badge status="processing" />}
       </Menu.Item>
       <Menu.Item onClick={selectNetwork} key="2">
-        Devnet {network === "Devnet" && <Badge status="processing" />}
+        Devnet {network === "devnet" && <Badge status="processing" />}
       </Menu.Item>
       <Menu.Item onClick={selectNetwork} key="3">
-        Testnet {network === "Testnet" && <Badge status="processing" />}
+        Testnet {network === "testnet" && <Badge status="processing" />}
       </Menu.Item>
     </Menu>
   );

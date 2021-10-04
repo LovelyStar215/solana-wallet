@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
-import { Keypair } from "@solana/web3.js";
+import { Keypair, Cluster } from "@solana/web3.js";
 
 export type GlobalContextType = {
-  network: string;
-  setNetwork: (network: string) => void;
+  network: Cluster;
+  setNetwork: (network: Cluster) => void;
   account: Keypair | null;
   setAccount: (account: Keypair | null) => void;
   mnemonic: string;
@@ -11,7 +11,7 @@ export type GlobalContextType = {
 };
 
 export const GlobalContext = createContext<GlobalContextType>({
-  network: "Devnet",
+  network: "devnet",
   setNetwork: () => null,
   account: null,
   setAccount: () => null,
