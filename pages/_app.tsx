@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Keypair } from "@solana/web3.js";
+import { Cluster, Keypair } from "@solana/web3.js";
 import 'antd/dist/antd.css';
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
@@ -7,12 +7,13 @@ import { GlobalContext } from "../context";
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [network, setNetwork] = useState<string>("devnet");
+  const [network, setNetwork] = useState<Cluster>("devnet");
   const [account, setAccount] = useState<Keypair | null>(null);
   const [mnemonic, setMnemonic] = useState<string>("");
+  const [balance, setBalance] = useState<number>(0);
 
   return (
-    <GlobalContext.Provider value={{ network, setNetwork, account, setAccount, mnemonic, setMnemonic }}>
+    <GlobalContext.Provider value={{ network, setNetwork, account, setAccount, mnemonic, setMnemonic, balance, setBalance }}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
