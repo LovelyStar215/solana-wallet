@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { NextPage } from "next";
 import { Keypair } from "@solana/web3.js";
 import styles from "../styles/Phrase.module.css";
@@ -7,8 +7,10 @@ import * as Bip39 from "bip39";
 import PhraseBox from "../components/PhraseBox";
 import { GlobalContext } from "../context";
 import Link from "next/link";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const Phrase: NextPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const { setAccount, mnemonic, setMnemonic } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -24,6 +26,10 @@ const Phrase: NextPage = () => {
         console.log(err);
       });
   }, []);
+
+  const handleLoading = () => {
+    setLoading(true);
+  };
 
   return (
     <>
@@ -47,9 +53,15 @@ const Phrase: NextPage = () => {
         your wallet.
       </p>
 
-      <Link href={`/wallet`} passHref>
-        <Button type="primary">Finish</Button>
-      </Link>
+      {!loading && (
+        <Link href={`/wallet`} passHref>
+          <Button type="primary" onClick={handleLoading}>
+            Finish
+          </Button>
+        </Link>
+      )}
+
+      {loading && <LoadingOutlined style={{ fontSize: 24 }} spin />}
     </>
   );
 };
