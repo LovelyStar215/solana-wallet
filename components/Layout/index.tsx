@@ -4,6 +4,8 @@ import {
   DownOutlined,
   UserOutlined,
   ArrowLeftOutlined,
+  LogoutOutlined,
+  CreditCardOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./index.module.css";
@@ -12,20 +14,21 @@ import { useRouter } from "next/router";
 import { Cluster } from "@solana/web3.js";
 
 type DomEvent = {
-  domEvent: BaseSyntheticEvent
-  key: string
-  keyPath: Array<string>
-}
+  domEvent: BaseSyntheticEvent;
+  key: string;
+  keyPath: Array<string>;
+};
 
 const Layout = ({ children }: { children: JSX.Element }) => {
-  const { network, setNetwork, account } = useContext(GlobalContext);
+  const { network, setNetwork, account, setAccount } =
+    useContext(GlobalContext);
 
   const router = useRouter();
 
   const selectNetwork = (e: DomEvent) => {
     const networks: Array<Cluster> = ["mainnet-beta", "devnet", "testnet"];
-    const selectedNetwork = networks[parseInt(e.key) - 1]
-    setNetwork(selectedNetwork)
+    const selectedNetwork = networks[parseInt(e.key) - 1];
+    setNetwork(selectedNetwork);
   };
 
   const menu = (
@@ -38,6 +41,25 @@ const Layout = ({ children }: { children: JSX.Element }) => {
       </Menu.Item>
       <Menu.Item onClick={selectNetwork} key="3">
         Testnet {network === "testnet" && <Badge status="processing" />}
+      </Menu.Item>
+    </Menu>
+  );
+
+  const handleLogout = () => {
+    console.log("logout");
+    setAccount(null);
+    router.push("/");
+  };
+
+  const profile = (
+    <Menu>
+      <Menu.Item key="/wallet" icon={<CreditCardOutlined />}>
+        <Link href="/wallet" passHref>
+          Wallet
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
+        Logout
       </Menu.Item>
     </Menu>
   );
@@ -55,13 +77,6 @@ const Layout = ({ children }: { children: JSX.Element }) => {
             className={styles.nav}
             selectedKeys={[router.pathname]}
           >
-            {account && (
-              <Menu.Item key="/wallet" icon={<UserOutlined />}>
-                <Link href="/wallet" passHref>
-                  Wallet
-                </Link>
-              </Menu.Item>
-            )}
             <Dropdown className={styles.top} overlay={menu} disabled={!account}>
               <a
                 className="ant-dropdown-link"
@@ -70,6 +85,21 @@ const Layout = ({ children }: { children: JSX.Element }) => {
                 Network <DownOutlined />
               </a>
             </Dropdown>
+
+            {account && (
+              <Dropdown
+                className={styles.top}
+                overlay={profile}
+                disabled={!account}
+              >
+                <a
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  <UserOutlined />
+                </a>
+              </Dropdown>
+            )}
           </Menu>
         </header>
 
