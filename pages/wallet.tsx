@@ -41,8 +41,10 @@ const Wallet: NextPage = () => {
   const refreshBalance = async () => {
     const connection = new Connection(clusterApiUrl(network), "confirmed");
     const publicKey = account?.publicKey;
-    const balance = await connection.getBalance(publicKey);
-    setBalance(balance / LAMPORTS_PER_SOL);
+    if (publicKey) {
+      const balance = await connection.getBalance(publicKey);
+      setBalance(balance / LAMPORTS_PER_SOL);
+    }
   };
 
   return (
