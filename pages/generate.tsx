@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import styles from "../styles/Phrase.module.css";
-import { Button, Spin } from "antd";
+import { Button } from "antd";
 import Link from "next/link";
 import { LoadingOutlined } from "@ant-design/icons";
 

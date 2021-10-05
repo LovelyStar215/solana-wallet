@@ -46,7 +46,6 @@ const Layout = ({ children }: { children: JSX.Element }) => {
   );
 
   const handleLogout = () => {
-    console.log("logout");
     setAccount(null);
     router.push("/");
   };
