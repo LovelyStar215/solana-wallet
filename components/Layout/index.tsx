@@ -1,5 +1,5 @@
 import { Badge, Dropdown, Menu, Divider } from "antd";
-import React, { useContext } from "react";
+import React, { BaseSyntheticEvent, useContext } from "react";
 import {
   DownOutlined,
   UserOutlined,
@@ -9,20 +9,23 @@ import Link from "next/link";
 import styles from "./index.module.css";
 import { GlobalContext } from "../../context";
 import { useRouter } from "next/router";
+import { Cluster } from "@solana/web3.js";
+
+type DomEvent = {
+  domEvent: BaseSyntheticEvent
+  key: string
+  keyPath: Array<string>
+}
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   const { network, setNetwork, account } = useContext(GlobalContext);
 
   const router = useRouter();
 
-  // What type should `e` be here?
-  const selectNetwork = (e: any) => {
-    const text = e.domEvent.target.innerText.trim().toLowerCase();
-    if (text === "mainnet") {
-      setNetwork("mainnet-beta");
-    } else {
-      setNetwork(text);
-    }
+  const selectNetwork = (e: DomEvent) => {
+    const networks: Array<Cluster> = ["mainnet-beta", "devnet", "testnet"];
+    const selectedNetwork = networks[parseInt(e.key) - 1]
+    setNetwork(selectedNetwork)
   };
 
   const menu = (
