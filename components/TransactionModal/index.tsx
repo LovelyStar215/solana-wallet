@@ -1,46 +1,133 @@
-import React, { useState } from "react";
-import { Modal, Button } from 'antd';
+import React, { useState, useContext } from "react";
+import { Input, Modal, Button } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { GlobalContext } from "../../context";
+import { Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, Transaction, sendAndConfirmTransaction, PublicKey } from "@solana/web3.js";
+import styled from 'styled-components';
+
+// TODOS
+// - add date
+// - style the inputs
+// - convert amount to string (28 => "twenty eight")
+// - change the $ and DOLLARS
+// - add from field
+// - move all width from px to %
+
+// - check balance after transaction
+// - handle insufficient funds error
+
+type FormT = {
+  from: string
+  to: string
+  amount: number
+  isSigned: boolean
+}
+
+const defaultForm: FormT = {
+  from: '',
+  to: '',
+  amount: 0,
+  isSigned: false,
+}
 
 const TransactionModal = () => {
-  const [visible, setVisible] = useState<boolean>(false);
-  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-  const [modalText, setModalText] = useState<string>('Content of the modal');
+  const { network, account } = useContext(GlobalContext);
+  const [form, setForm] = useState<FormT>(defaultForm);
+  const [sending, setSending] = useState<boolean>(false);
+  
+  const onFieldChange = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value
+    })
+  }
 
-  const showModal = () => {
-    setVisible(true);
-  };
+  const transfer = async () => {
+    if (!account) return
+    const connection = new Connection(clusterApiUrl(network), "confirmed");
 
-  const handleOk = () => {
-    setModalText('The modal will be closed after two seconds');
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
+    console.log(form)
 
-  const handleCancel = () => {
-    console.log('Clicked cancel button');
-    setVisible(false);
+    const instructions = SystemProgram.transfer({
+      fromPubkey: account.publicKey,
+      toPubkey: new PublicKey(form.to),
+      lamports: 10000,
+    });
+
+    console.log('instructions', instructions)
+
+    const signers = [
+      {
+        publicKey: account.publicKey,
+        secretKey: account.secretKey,
+      },
+    ];
+
+    console.log('signers', signers)
+
+    const transaction = new Transaction().add(instructions);
+
+    console.log('transaction', transaction)
+
+    setSending(true)
+    const hash = await sendAndConfirmTransaction(
+      connection,
+      transaction,
+      signers,
+    );
+    setSending(false)
+    console.log('hash', hash)
   };
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      {/* <Button type="primary">
         Send <ArrowRightOutlined />
-      </Button>
-      <Modal
-        title="Title"
-        visible={visible}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
-        <p>{modalText}</p>
-      </Modal>
+      </Button> */}
+      <CheckContainer>
+        <CheckImage src={"https://www.bankrate.com/2017/10/31100710/how-to-write-a-check.jpg"} alt="Check" />
+        <RecipientInput value={form.to} onChange={(e) => onFieldChange('to', e.target.value)} />
+        <AmountInput value={form.amount} onChange={(e) => onFieldChange('amount', e.target.value)} />
+        <SignatureInput onClick={transfer}>Sign and Send</SignatureInput>
+      </CheckContainer>
     </>
   );
 };
+
+const CheckContainer = styled.div`
+  width: 800px;
+  margin-top: 50px;
+  position: relative;
+`;
+
+const CheckImage = styled.img`
+  width: 100%;
+  
+`;
+
+const RecipientInput = styled(Input)`
+  position: absolute;
+  top: 38%;
+  left: 23%;
+  height: 30px;
+  width: 300px;
+`;
+
+const AmountInput = styled(Input)`
+  position: absolute;
+  top: 38%;
+  left: 70%;
+  height: 30px;
+  width: 100px;
+`;
+
+const SignatureInput = styled(Button)`
+  position: absolute;
+  top: 58%;
+  left: 54%;
+  height: 30px;
+  width: 250px;
+`;
+
 
 export default TransactionModal;
