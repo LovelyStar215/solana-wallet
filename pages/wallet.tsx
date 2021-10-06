@@ -1,15 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { NextPage } from "next";
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
 import TransactionModal from "../components/TransactionModal";
-import {
-  Connection,
-  clusterApiUrl,
-  LAMPORTS_PER_SOL,
-} from "@solana/web3.js";
+import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
@@ -62,13 +59,21 @@ const Wallet: NextPage = () => {
           <h2>
             {balance} <span>SOL</span>
           </h2>
+          {network === "devnet" && account && (
+            <>
+              <Button onClick={handleAirdrop} className={styles.airdrop}>
+                Airdrop
+              </Button>
+              <Tooltip
+                title="Click to receive 1 devnet SOL into your account"
+                placement={"right"}
+              >
+                <p className={styles.question}>?</p>
+              </Tooltip>
+            </>
+          )}
           <TransactionModal />
         </div>
-      )}
-      {/* Maybe make the airdrop link dependent on whether there are funds in the account already? */}
-      {/* Or find a way to display a message if the faucet rate limits you so user knows what's going on */}
-      {network === "devnet" && account && (
-        <p onClick={handleAirdrop}>Airdrop 1 SOL into Devnet account</p>
       )}
     </>
   );
