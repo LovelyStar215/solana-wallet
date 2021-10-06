@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Input, Modal, Button } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { Input, Button } from "antd";
 import { GlobalContext } from "../../context";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, Transaction, sendAndConfirmTransaction, PublicKey } from "@solana/web3.js";
 import styled from 'styled-components';
+import Image from 'next/image'
 
 // TODOS
 // - add date
@@ -81,11 +81,8 @@ const TransactionModal = () => {
 
   return (
     <>
-      {/* <Button type="primary">
-        Send <ArrowRightOutlined />
-      </Button> */}
       <CheckContainer>
-        <CheckImage src={"https://www.bankrate.com/2017/10/31100710/how-to-write-a-check.jpg"} alt="Check" />
+        <CheckImage src="/how-to-write-a-check.jpeg" alt="Check" height="450" width="800" />
         <RecipientInput value={form.to} onChange={(e) => onFieldChange('to', e.target.value)} />
         <AmountInput value={form.amount} onChange={(e) => onFieldChange('amount', e.target.value)} />
         <SignatureInput onClick={transfer}>Sign and Send</SignatureInput>

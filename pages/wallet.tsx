@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
 import TransactionLayout from "../components/TransactionLayout";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { QuestionCircleOutlined } from "@ant-design/icons";
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
