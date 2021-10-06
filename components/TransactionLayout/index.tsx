@@ -92,6 +92,9 @@ const TransactionModal = () => {
           height="335"
           width="800"
         />
+        <CheckDate>
+          {new Date().toString().split(' ').slice(1,4).join(" ")}
+        </CheckDate>
         <RecipientInput
           value={form.to}
           onChange={(e) => onFieldChange("to", e.target.value)}
@@ -129,6 +132,12 @@ const CheckContainer = styled.div`
 
 const CheckImage = styled.img`
   width: 100%;
+`;
+
+const CheckDate = styled.p`
+  position: absolute;
+  top: 20%;
+  left: 70%;
 `;
 
 const RecipientInput = styled(Input)`
