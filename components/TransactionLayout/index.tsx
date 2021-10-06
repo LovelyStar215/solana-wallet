@@ -82,7 +82,7 @@ const TransactionModal = () => {
   return (
     <>
       <CheckContainer>
-        <CheckImage src="/how-to-write-a-check.jpeg" alt="Check" height="450" width="800" />
+        <CheckImage src="/how-to-write-a-check-crop.jpeg" alt="Check" height="335" width="800" />
         <RecipientInput value={form.to} onChange={(e) => onFieldChange('to', e.target.value)} />
         <AmountInput value={form.amount} onChange={(e) => onFieldChange('amount', e.target.value)} />
         <SignatureInput onClick={transfer}>Sign and Send</SignatureInput>
