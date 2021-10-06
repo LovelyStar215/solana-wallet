@@ -4,7 +4,7 @@ import { Button, Tooltip } from "antd";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
-import TransactionModal from "../components/TransactionModal";
+import TransactionLayout from "../components/TransactionLayout";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
@@ -72,7 +72,7 @@ const Wallet: NextPage = () => {
               </Tooltip>
             </>
           )}
-          <TransactionModal />
+          <TransactionLayout />
         </div>
       )}
     </>
