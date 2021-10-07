@@ -139,8 +139,9 @@ const TransactionModal = () => {
 
 const CheckContainer = styled.div`
   width: 77%;
-  margin-top: 3rem;
+  margin: auto;
   position: relative;
+  max-width: 800px;
 `;
 
 const CheckImage = styled.img`

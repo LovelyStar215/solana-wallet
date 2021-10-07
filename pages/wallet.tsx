@@ -1,15 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip, Drawer } from "antd";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
 import TransactionLayout from "../components/TransactionLayout";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { refreshBalance } from "../utils";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
+  const [visible, setVisible] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -42,6 +44,14 @@ const Wallet: NextPage = () => {
     }
   };
 
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+
   return (
     <>
       {account && (
@@ -70,7 +80,20 @@ const Wallet: NextPage = () => {
               </Tooltip>
             </>
           )}
-          <TransactionLayout />
+
+          <Button type="primary" onClick={showModal}>
+            Send <ArrowRightOutlined />
+          </Button>
+
+          <Drawer
+            title="Send Funds"
+            placement="bottom"
+            onClose={handleClose}
+            visible={visible}
+            height={"45vh"}
+          >
+            <TransactionLayout />
+          </Drawer>
         </div>
       )}
     </>
