@@ -20,7 +20,7 @@ type DomEvent = {
 };
 
 const Layout = ({ children }: { children: JSX.Element }) => {
-  const { network, setNetwork, account, setAccount } =
+  const { network, setNetwork, account, setAccount, setBalance, setMnemonic } =
     useContext(GlobalContext);
 
   const router = useRouter();
@@ -47,6 +47,9 @@ const Layout = ({ children }: { children: JSX.Element }) => {
 
   const handleLogout = () => {
     setAccount(null);
+    setNetwork("devnet");
+    setBalance(0);
+    setMnemonic("");
     router.push("/");
   };
 
