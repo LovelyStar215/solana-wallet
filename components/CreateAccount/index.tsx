@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/HomeBoxes.module.css";
 import { Button } from "antd";
 import Link from "next/link";
-import { BankOutlined } from "@ant-design/icons";
+import { BankOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const CreateAccount = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  const handleGenerate = () => {
+    setLoading(true);
+  };
+
   return (
     <div className={`${styles.card} ${styles.create}`}>
       <header>
@@ -18,11 +28,18 @@ const CreateAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Link href={`/generate`} passHref>
-          <Button type="primary">
-            Create New Wallet
+        {!loading && (
+          <Link href={`/generate`} passHref>
+            <Button type="primary" onClick={handleGenerate}>
+              Create New Wallet
+            </Button>
+          </Link>
+        )}
+        {loading && (
+          <Button className={styles.disabledButton} disabled>
+            <LoadingOutlined spin />
           </Button>
-        </Link>
+        )}
       </div>
     </div>
   );

@@ -37,3 +37,7 @@
   justify-content: center;
   margin: 1.5rem auto 0.5rem;
 }
+
+.disabledButton {
+  width: 150px;
+}

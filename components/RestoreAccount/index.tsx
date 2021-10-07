@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/HomeBoxes.module.css";
 import { Button } from "antd";
-import { DownloadOutlined, UnlockOutlined } from "@ant-design/icons";
+import { LoadingOutlined, UnlockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 
 const RestoreAccount = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  const handleGetWallet = () => {
+    setLoading(true);
+  };
+
   return (
     <div className={`${styles.card} ${styles.create}`}>
       <header>
-        {/* <DownloadOutlined /> */}
         <UnlockOutlined
           style={{ fontSize: "3rem", margin: "2rem 0", display: "block" }}
         />
@@ -19,9 +28,16 @@ const RestoreAccount = () => {
       </header>
 
       <div className={styles.buttons}>
-        <Link href={`/recover`} passHref>
-          <Button>Get Existing Wallet</Button>
-        </Link>
+        {!loading && (
+          <Link href={`/recover`} passHref>
+            <Button onClick={handleGetWallet}>Get Existing Wallet</Button>
+          </Link>
+        )}
+        {loading && (
+          <Button className={styles.disabledButton} disabled>
+            <LoadingOutlined spin />
+          </Button>
+        )}
       </div>
     </div>
   );
