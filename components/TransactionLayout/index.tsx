@@ -4,7 +4,6 @@ import { GlobalContext } from "../../context";
 import {
   Connection,
   clusterApiUrl,
-  LAMPORTS_PER_SOL,
   SystemProgram,
   Transaction,
   sendAndConfirmTransaction,
@@ -15,13 +14,7 @@ const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
 
 // TODOS
-// - add date
 // - style the inputs
-// - convert amount to string (28 => "twenty eight")
-// - change the $ and DOLLARS
-// - add from field
-// - move all width from px to %
-
 // - check balance after transaction
 // - handle insufficient funds error
 
@@ -89,8 +82,7 @@ const TransactionModal = () => {
         <CheckImage
           src="/how-to-write-a-check-cropped.jpeg"
           alt="Check"
-          height="335"
-          width="800"
+          
         />
         <CheckFrom>{`FROM: ${account?.publicKey}`}</CheckFrom>
         <CheckDate>
@@ -126,8 +118,8 @@ const TransactionModal = () => {
 };
 
 const CheckContainer = styled.div`
-  width: 800px;
-  margin-top: 50px;
+  width: 77%;
+  margin-top: 3rem;
   position: relative;
 `;
 
@@ -151,24 +143,24 @@ const RecipientInput = styled(Input)`
   position: absolute;
   top: 35%;
   left: 17%;
-  height: 30px;
-  width: 300px;
+  height: 9%;
+  width: 50%;
 `;
 
 const AmountInput = styled(Input)`
   position: absolute;
   top: 35%;
   left: 76%;
-  height: 30px;
-  width: 100px;
+  height: 9%;
+  width: 15%;
 `;
 
 const SignatureInput = styled(Button)`
   position: absolute;
   top: 69%;
   left: 59%;
-  height: 30px;
-  width: 250px;
+  height: 9%;
+  width: 32.5%;
 `;
 
 const AmountText = styled.p`
