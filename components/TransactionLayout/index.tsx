@@ -12,6 +12,7 @@ import {
 import styled from "styled-components";
 const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
+import { refreshBalance } from "../../utils";
 
 // TODOS
 // - style the inputs
@@ -33,11 +34,11 @@ const defaultForm: FormT = {
 };
 
 const TransactionModal = () => {
-  const { network, account } = useContext(GlobalContext);
+  const { network, account, setBalance } = useContext(GlobalContext);
   const [form, setForm] = useState<FormT>(defaultForm);
   const [sending, setSending] = useState<boolean>(false);
 
-  const onFieldChange = (field, value) => {
+  const onFieldChange = (field: string, value: string | number) => {
     setForm({
       ...form,
       [field]: value,
@@ -73,6 +74,7 @@ const TransactionModal = () => {
 
     setSending(false);
 
+    setBalance(await refreshBalance(network, account))
     console.log("hash", hash);
   };
 

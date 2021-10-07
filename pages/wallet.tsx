@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
 import TransactionLayout from "../components/TransactionLayout";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { refreshBalance } from "../utils";
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
@@ -15,8 +16,15 @@ const Wallet: NextPage = () => {
   useEffect(() => {
     if (!account) {
       router.push("/");
+      return;
     }
-    refreshBalance();
+    refreshBalance(network, account)
+      .then((updatedBalance) => {
+        setBalance(updatedBalance);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [account, router, network]);
 
   const handleAirdrop = async () => {
@@ -28,18 +36,9 @@ const Wallet: NextPage = () => {
         LAMPORTS_PER_SOL
       );
       await connection.confirmTransaction(transaction);
-      refreshBalance();
+      setBalance(await refreshBalance(network, account));
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const refreshBalance = async () => {
-    const connection = new Connection(clusterApiUrl(network), "confirmed");
-    const publicKey = account?.publicKey;
-    if (publicKey) {
-      const balance = await connection.getBalance(publicKey);
-      setBalance(balance / LAMPORTS_PER_SOL);
     }
   };
 
