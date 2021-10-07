@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Input, Button } from "antd";
+import { Input, Button, message } from "antd";
 import { GlobalContext } from "../../context";
 import {
   Connection,
@@ -38,7 +38,12 @@ const TransactionModal = () => {
   const [form, setForm] = useState<FormT>(defaultForm);
   const [sending, setSending] = useState<boolean>(false);
 
-  const onFieldChange = (field: string, value: string | number) => {
+  const onFieldChange = (field: string, value: string) => {
+    if (field === "amount" && !!value.match(/\D+/)) {
+      console.log(value);
+      return;
+    }
+
     setForm({
       ...form,
       [field]: value,
@@ -47,35 +52,43 @@ const TransactionModal = () => {
 
   const transfer = async () => {
     if (!account) return;
+
     const connection = new Connection(clusterApiUrl(network), "confirmed");
 
-    const instructions = SystemProgram.transfer({
-      fromPubkey: account.publicKey,
-      toPubkey: new PublicKey(form.to),
-      lamports: form.amount,
-    });
+    try {
+      const instructions = SystemProgram.transfer({
+        fromPubkey: account.publicKey,
+        toPubkey: new PublicKey(form.to),
+        lamports: form.amount,
+      });
 
-    const signers = [
-      {
-        publicKey: account.publicKey,
-        secretKey: account.secretKey,
-      },
-    ];
+      const signers = [
+        {
+          publicKey: account.publicKey,
+          secretKey: account.secretKey,
+        },
+      ];
 
-    const transaction = new Transaction().add(instructions);
+      const transaction = new Transaction().add(instructions);
 
-    setSending(true);
+      setSending(true);
 
-    const hash = await sendAndConfirmTransaction(
-      connection,
-      transaction,
-      signers
-    );
+      const hash = await sendAndConfirmTransaction(
+        connection,
+        transaction,
+        signers
+      );
 
-    setSending(false);
+      setSending(false);
 
-    setBalance(await refreshBalance(network, account));
-    console.log("hash", hash);
+      setBalance(await refreshBalance(network, account));
+      message.success("Transaction sent");
+    } catch (error) {
+      console.log({ error });
+      message.error(
+        "Transaction failed, please check your inputs and try again"
+      );
+    }
   };
 
   return (
