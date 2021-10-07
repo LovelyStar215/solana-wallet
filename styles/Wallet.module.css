@@ -7,14 +7,14 @@
 
 .airdrop {
   position: absolute !important;
-  top: 19%;
-  left: 70%;
+  top: 63%;
+  left: 89%;
 }
 
 .question {
   position: absolute !important;
-  top: 20%;
-  left: 80%;
+  top: 66%;
+  left: 110%;
   border: 0.5px solid #ccc;
   color: #a5a5a5;
   border-radius: 50%;

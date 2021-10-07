@@ -128,6 +128,7 @@ const TransactionModal = () => {
               !form.to ||
               form.amount == 0
             }
+            type="primary"
           >
             Sign and Send
           </SignatureInput>
