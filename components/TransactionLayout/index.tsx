@@ -8,6 +8,7 @@ import {
   Transaction,
   sendAndConfirmTransaction,
   PublicKey,
+  LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import styled from "styled-components";
 const converter = require("number-to-words");
@@ -16,7 +17,6 @@ import { refreshBalance } from "../../utils";
 
 // TODOS
 // - style the inputs
-// - check balance after transaction
 // - handle insufficient funds error
 
 type FormT = {
@@ -34,7 +34,7 @@ const defaultForm: FormT = {
 };
 
 const TransactionModal = () => {
-  const { network, account, setBalance } = useContext(GlobalContext);
+  const { network, account, balance, setBalance } = useContext(GlobalContext);
   const [form, setForm] = useState<FormT>(defaultForm);
   const [sending, setSending] = useState<boolean>(false);
 
@@ -74,21 +74,17 @@ const TransactionModal = () => {
 
     setSending(false);
 
-    setBalance(await refreshBalance(network, account))
+    setBalance(await refreshBalance(network, account));
     console.log("hash", hash);
   };
 
   return (
     <>
       <CheckContainer>
-        <CheckImage
-          src="/how-to-write-a-check-cropped.jpeg"
-          alt="Check"
-          
-        />
+        <CheckImage src="/how-to-write-a-check-cropped.jpeg" alt="Check" />
         <CheckFrom>{`FROM: ${account?.publicKey}`}</CheckFrom>
         <CheckDate>
-          {new Date().toString().split(' ').slice(1,4).join(" ")}
+          {new Date().toString().split(" ").slice(1, 4).join(" ")}
         </CheckDate>
         <RecipientInput
           value={form.to}
@@ -112,7 +108,16 @@ const TransactionModal = () => {
             spin
           />
         ) : (
-          <SignatureInput onClick={transfer}>Sign and Send</SignatureInput>
+          <SignatureInput
+            onClick={transfer}
+            disabled={
+              form.amount / LAMPORTS_PER_SOL > balance ||
+              !form.to ||
+              form.amount == 0
+            }
+          >
+            Sign and Send
+          </SignatureInput>
         )}
       </CheckContainer>
     </>

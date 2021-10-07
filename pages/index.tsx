@@ -1,8 +1,8 @@
+import React from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import CreateAccount from "../components/CreateAccount";
 import RestoreAccount from "../components/RestoreAccount";
-import React from "react";
 
 const Home: NextPage = () => {
   return (
