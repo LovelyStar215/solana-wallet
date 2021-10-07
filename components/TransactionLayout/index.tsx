@@ -92,6 +92,7 @@ const TransactionModal = () => {
           height="335"
           width="800"
         />
+        <CheckFrom>{`FROM: ${account?.publicKey}`}</CheckFrom>
         <CheckDate>
           {new Date().toString().split(' ').slice(1,4).join(" ")}
         </CheckDate>
@@ -132,6 +133,12 @@ const CheckContainer = styled.div`
 
 const CheckImage = styled.img`
   width: 100%;
+`;
+
+const CheckFrom = styled.p`
+  position: absolute;
+  top: 11%;
+  left: 3.6%;
 `;
 
 const CheckDate = styled.p`
