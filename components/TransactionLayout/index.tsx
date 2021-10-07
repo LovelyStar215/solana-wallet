@@ -138,7 +138,7 @@ const CheckFrom = styled.p`
 const CheckDate = styled.p`
   position: absolute;
   top: 20%;
-  left: 70%;
+  left: 68%;
 `;
 
 const RecipientInput = styled(Input)`
