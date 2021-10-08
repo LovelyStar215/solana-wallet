@@ -96,7 +96,7 @@ const TransactionModal = () => {
   return (
     <>
       <CheckContainer>
-        <CheckImage src="/how-to-write-a-check-cropped.jpeg" alt="Check" />
+        <CheckImage src="/check.jpeg" alt="Check" />
         <CheckFrom>{`FROM: ${account?.publicKey}`}</CheckFrom>
 
         {transactionSig && (
