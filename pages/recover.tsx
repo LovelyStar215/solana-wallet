@@ -2,11 +2,11 @@ import React, { useEffect, useContext, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Keypair } from "@solana/web3.js";
-import styles from "../styles/Phrase.module.css";
 import * as Bip39 from "bip39";
 import { Form, Input, Button } from "antd";
 import { GlobalContext } from "../context";
 import { LoadingOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 
 const Recover: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -38,7 +38,7 @@ const Recover: NextPage = () => {
 
   return (
     <>
-      <h1 className={styles.title}>Import Wallet</h1>
+      <RecoverTitle>Import Wallet</RecoverTitle>
 
       <p>Enter your secret recovery phrase here to restore your wallet.</p>
 
@@ -99,5 +99,9 @@ const Recover: NextPage = () => {
     </>
   );
 };
+
+const RecoverTitle = styled.h1`
+  margin-top: 2rem;
+`;
 
 export default Recover;
