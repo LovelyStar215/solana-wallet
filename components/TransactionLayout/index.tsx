@@ -155,7 +155,7 @@ const CheckContainer = styled.div`
   width: 77%;
   margin: auto;
   position: relative;
-  max-width: 800px;
+  max-width: 750px;
 `;
 
 const CheckImage = styled.img`
