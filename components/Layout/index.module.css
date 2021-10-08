@@ -46,7 +46,9 @@ a.back {
   margin-top: 2rem;
 }
 
-a.back:hover {
+a.back:hover,
+a.back:focus,
+a.back:active {
   color: #0070f3;
 }
 
@@ -56,4 +58,10 @@ a.back:hover {
 
 .footerLink {
   color: #999;
+}
+
+.footerLink:hover,
+.footerLink:focus,
+.footerLink:active {
+  color: #0070f3;
 }

@@ -38,11 +38,11 @@ const Recover: NextPage = () => {
 
   return (
     <>
-      <RecoverTitle>Import Wallet</RecoverTitle>
+      <h1 className={"title"}>Import Wallet</h1>
 
       <p>Enter your secret recovery phrase here to restore your wallet.</p>
 
-      <Form
+      <StyledForm
         form={form}
         layout="vertical"
         autoComplete="off"
@@ -95,13 +95,15 @@ const Recover: NextPage = () => {
         )}
 
         {loading && <LoadingOutlined style={{ fontSize: 24 }} spin />}
-      </Form>
+      </StyledForm>
     </>
   );
 };
 
-const RecoverTitle = styled.h1`
-  margin-top: 2rem;
-`;
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 export default Recover;

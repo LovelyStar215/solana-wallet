@@ -1,26 +1,15 @@
 import React from "react";
-import styles from "../../styles/Phrase.module.css";
-import { notification, Tooltip } from 'antd';
+import { Typography } from "antd";
 
+const { Paragraph } = Typography;
 
-const PhraseBox = ({ mnemonic }) => {
-  const copyMnemonic = (e) => {
-    const mnemonicText = e.target.innerText;
-    navigator.clipboard.writeText(mnemonicText)
-
-    notification.open({
-      message: 'Phrase Copied',
-      description:
-        'Remember to store this somewhere safe!',
-    });
-  };
-
+const PhraseBox = ({ mnemonic }: { mnemonic: string }) => {
   return (
-    <Tooltip title="click to copy">
-      <div className={styles.box} id="mnemonic" onClick={copyMnemonic}>
+    <div className={"box"}>
+      <Paragraph copyable={{ text: `${mnemonic}`, tooltips: `Copy` }}>
         {mnemonic}
-      </div>
-    </Tooltip>
+      </Paragraph>
+    </div>
   );
 };
 
