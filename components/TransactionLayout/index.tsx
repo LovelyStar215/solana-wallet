@@ -15,10 +15,6 @@ const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
 import { refreshBalance } from "../../utils";
 
-// TODOS
-// - style the inputs
-// - handle insufficient funds error
-
 type FormT = {
   from: string;
   to: string;
@@ -37,6 +33,7 @@ const TransactionModal = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
   const [form, setForm] = useState<FormT>(defaultForm);
   const [sending, setSending] = useState<boolean>(false);
+  const [transactionSig, setTransactionSig] = useState<string>("");
 
   const onFieldChange = (field: string, value: string) => {
     if (field === "amount" && !!value.match(/\D+/)) {
@@ -56,6 +53,8 @@ const TransactionModal = () => {
     const connection = new Connection(clusterApiUrl(network), "confirmed");
 
     try {
+      setTransactionSig("");
+
       const instructions = SystemProgram.transfer({
         fromPubkey: account.publicKey,
         toPubkey: new PublicKey(form.to),
@@ -79,13 +78,15 @@ const TransactionModal = () => {
         signers
       );
 
+      setTransactionSig(confirmation);
+
       setSending(false);
 
       setBalance(await refreshBalance(network, account));
       message.success(`Transaction confirmed`);
-      console.log(confirmation)
+      console.log(confirmation);
     } catch (error) {
-      console.log({ error });
+      console.log(error);
       message.error(
         "Transaction failed, please check your inputs and try again"
       );
@@ -97,6 +98,16 @@ const TransactionModal = () => {
       <CheckContainer>
         <CheckImage src="/how-to-write-a-check-cropped.jpeg" alt="Check" />
         <CheckFrom>{`FROM: ${account?.publicKey}`}</CheckFrom>
+
+        {transactionSig && (
+          <Processed
+            href={`https://explorer.solana.com/tx/${transactionSig}?cluster=devnet`}
+            target="_blank"
+          >
+            Processed - Review on Solana Block Explorer
+          </Processed>
+        )}
+
         <CheckDate>
           {new Date().toString().split(" ").slice(1, 4).join(" ")}
         </CheckDate>
@@ -134,6 +145,7 @@ const TransactionModal = () => {
             Sign and Send
           </SignatureInput>
         )}
+        <RatioText>1 $SOL = 1,000,000,000 $L</RatioText>
       </CheckContainer>
     </>
   );
@@ -156,9 +168,17 @@ const CheckFrom = styled.p`
   left: 3.6%;
 `;
 
-const CheckDate = styled.p`
+const Processed = styled.a`
   position: absolute;
   top: 20%;
+  left: 3.6%;
+  font-style: italic;
+  color: #dc1fff;
+`;
+
+const CheckDate = styled.p`
+  position: absolute;
+  top: 19%;
   left: 68%;
 `;
 
@@ -190,6 +210,12 @@ const AmountText = styled.p`
   position: absolute;
   top: 52%;
   left: 5%;
+`;
+
+const RatioText = styled.p`
+  position: absolute;
+  top: 71%;
+  left: 11%;
 `;
 
 export default TransactionModal;
