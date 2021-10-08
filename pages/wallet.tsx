@@ -101,7 +101,7 @@ const Wallet: NextPage = () => {
             placement="bottom"
             onClose={handleClose}
             visible={visible}
-            height={"45vh"}
+            height={"55vh"}
           >
             <TransactionLayout />
           </Drawer>
