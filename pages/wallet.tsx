@@ -63,7 +63,7 @@ const Wallet: NextPage = () => {
     <>
       {account && (
         <div className={styles.wallet}>
-          <h1>Account Dashboard</h1>
+          <h1>Dashboard</h1>
 
           <Paragraph copyable={{ text: account.publicKey.toString(), tooltips: `Copy` }}>
             {`Account: ${displayAddress(account.publicKey.toString())}`}
