@@ -30,14 +30,16 @@ const Wallet: NextPage = () => {
   }, [account, router, network]);
 
   const handleAirdrop = async () => {
+    if (!account) return;
+
     try {
       const connection = new Connection(clusterApiUrl(network), "confirmed");
-      const publicKey = account?.publicKey;
-      const transaction = await connection.requestAirdrop(
+      const publicKey = account.publicKey;
+      const confirmation = await connection.requestAirdrop(
         publicKey,
         LAMPORTS_PER_SOL
       );
-      await connection.confirmTransaction(transaction);
+      await connection.confirmTransaction(confirmation);
       setBalance(await refreshBalance(network, account));
     } catch (error) {
       console.log(error);

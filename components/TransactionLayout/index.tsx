@@ -73,7 +73,7 @@ const TransactionModal = () => {
 
       setSending(true);
 
-      const hash = await sendAndConfirmTransaction(
+      const confirmation = await sendAndConfirmTransaction(
         connection,
         transaction,
         signers
@@ -82,7 +82,8 @@ const TransactionModal = () => {
       setSending(false);
 
       setBalance(await refreshBalance(network, account));
-      message.success("Transaction sent");
+      message.success(`Transaction confirmed`);
+      console.log(confirmation)
     } catch (error) {
       console.log({ error });
       message.error(
