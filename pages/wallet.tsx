@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
-import { Button, Tooltip, Drawer } from "antd";
+import { Button, Tooltip, Drawer, Typography } from "antd";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import styles from "../styles/Wallet.module.css";
@@ -8,6 +8,8 @@ import TransactionLayout from "../components/TransactionLayout";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { refreshBalance } from "../utils";
 import { ArrowRightOutlined } from "@ant-design/icons";
+
+const { Paragraph } = Typography;
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
@@ -54,12 +56,19 @@ const Wallet: NextPage = () => {
     setVisible(false);
   };
 
+  const displayAddress = (address: string) =>
+    `${address.slice(0, 4)}...${address.slice(-4)}`;
+
   return (
     <>
       {account && (
         <div className={styles.wallet}>
           <h1>Account Dashboard</h1>
-          <p>Account: {account?.publicKey.toString()}</p>
+
+          <Paragraph copyable={{ text: account.publicKey.toString(), tooltips: `Copy` }}>
+            {`Account: ${displayAddress(account.publicKey.toString())}`}
+          </Paragraph>
+
           <p>
             Connected to{" "}
             {network === "mainnet-beta"
