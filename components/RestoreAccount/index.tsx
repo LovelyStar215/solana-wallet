@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/HomeBoxes.module.css";
 import { Button } from "antd";
 import { LoadingOutlined, UnlockOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { Card } from "../../styles/StyledComponents.styles";
 
 const RestoreAccount = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,8 +16,7 @@ const RestoreAccount = () => {
   };
 
   return (
-    <div className={`${styles.card} ${styles.create}`}>
-      <header>
+    <Card>
         <UnlockOutlined
           style={{ fontSize: "3rem", margin: "2rem 0", display: "block" }}
         />
@@ -25,21 +24,20 @@ const RestoreAccount = () => {
         <p>
           Use your secret recovery phrase to restore an existing Solana wallet.
         </p>
-      </header>
 
-      <div className={styles.buttons}>
+      <div className={"buttons"}>
         {!loading && (
           <Link href={`/recover`} passHref>
             <Button onClick={handleGetWallet}>Get Existing Wallet</Button>
           </Link>
         )}
         {loading && (
-          <Button className={styles.disabledButton} disabled>
+          <Button className={"disabledButton"} disabled>
             <LoadingOutlined spin />
           </Button>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -3,11 +3,10 @@ import { NextPage } from "next";
 import { Button, Tooltip, Drawer, Typography } from "antd";
 import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
-import styles from "../styles/Wallet.module.css";
 import TransactionLayout from "../components/TransactionLayout";
-import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { refreshBalance } from "../utils";
+import { refreshBalance, handleAirdrop } from "../utils";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Dashboard, Airdrop, Question } from "../styles/StyledComponents.styles";
 
 const { Paragraph } = Typography;
 
@@ -31,20 +30,10 @@ const Wallet: NextPage = () => {
       });
   }, [account, router, network]);
 
-  const handleAirdrop = async () => {
-    if (!account) return;
-
-    try {
-      const connection = new Connection(clusterApiUrl(network), "confirmed");
-      const publicKey = account.publicKey;
-      const confirmation = await connection.requestAirdrop(
-        publicKey,
-        LAMPORTS_PER_SOL
-      );
-      await connection.confirmTransaction(confirmation);
-      setBalance(await refreshBalance(network, account));
-    } catch (error) {
-      console.log(error);
+  const airdrop = async () => {
+    const updatedBalance = await handleAirdrop(network, account);
+    if (typeof updatedBalance === "number") {
+      setBalance(updatedBalance)
     }
   };
 
@@ -62,10 +51,12 @@ const Wallet: NextPage = () => {
   return (
     <>
       {account && (
-        <div className={styles.wallet}>
+        <Dashboard>
           <h1>Dashboard</h1>
 
-          <Paragraph copyable={{ text: account.publicKey.toString(), tooltips: `Copy` }}>
+          <Paragraph
+            copyable={{ text: account.publicKey.toString(), tooltips: `Copy` }}
+          >
             {`Account: ${displayAddress(account.publicKey.toString())}`}
           </Paragraph>
 
@@ -80,14 +71,14 @@ const Wallet: NextPage = () => {
           </h2>
           {network === "devnet" && account && (
             <>
-              <Button onClick={handleAirdrop} className={styles.airdrop}>
+              <Airdrop onClick={airdrop}>
                 Airdrop
-              </Button>
+              </Airdrop>
               <Tooltip
                 title="Click to receive 1 devnet SOL into your account"
                 placement={"right"}
               >
-                <p className={styles.question}>?</p>
+                <Question>?</Question>
               </Tooltip>
             </>
           )}
@@ -105,7 +96,7 @@ const Wallet: NextPage = () => {
           >
             <TransactionLayout />
           </Drawer>
-        </div>
+        </Dashboard>
       )}
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Input, Button, message } from "antd";
+import { message } from "antd";
 import { GlobalContext } from "../../context";
 import {
   Connection,
@@ -10,10 +10,21 @@ import {
   PublicKey,
   LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
-import styled from "styled-components";
 const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
 import { refreshBalance } from "../../utils";
+import {
+  CheckContainer,
+  CheckImage,
+  CheckFrom,
+  Processed,
+  CheckDate,
+  RecipientInput,
+  AmountInput,
+  SignatureInput,
+  AmountText,
+  RatioText,
+} from "../../styles/StyledComponents.styles";
 
 type FormT = {
   from: string;
@@ -150,72 +161,5 @@ const TransactionModal = () => {
     </>
   );
 };
-
-const CheckContainer = styled.div`
-  width: 77%;
-  margin: auto;
-  position: relative;
-  max-width: 750px;
-`;
-
-const CheckImage = styled.img`
-  width: 100%;
-`;
-
-const CheckFrom = styled.p`
-  position: absolute;
-  top: 11%;
-  left: 3.6%;
-`;
-
-const Processed = styled.a`
-  position: absolute;
-  top: 20%;
-  left: 3.6%;
-  font-style: italic;
-  color: #dc1fff;
-`;
-
-const CheckDate = styled.p`
-  position: absolute;
-  top: 19%;
-  left: 68%;
-`;
-
-const RecipientInput = styled(Input)`
-  position: absolute;
-  top: 35%;
-  left: 17%;
-  height: 9%;
-  width: 50%;
-`;
-
-const AmountInput = styled(Input)`
-  position: absolute;
-  top: 35%;
-  left: 76%;
-  height: 9%;
-  width: 15%;
-`;
-
-const SignatureInput = styled(Button)`
-  position: absolute;
-  top: 69%;
-  left: 59%;
-  height: 9%;
-  width: 32.5%;
-`;
-
-const AmountText = styled.p`
-  position: absolute;
-  top: 52%;
-  left: 5%;
-`;
-
-const RatioText = styled.p`
-  position: absolute;
-  top: 71%;
-  left: 11%;
-`;
 
 export default TransactionModal;
