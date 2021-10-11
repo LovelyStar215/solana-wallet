@@ -6,7 +6,7 @@ Under the hood, wallets leverage cryptographic technologies to generate or recov
 
 In this tutorial, you'll learn to develop a wallet for the [Solana](https://solana.com/) protocol. We will provide a simple Next.js application  that you will complete by leveraging Solana's JavaScript SDK, [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/index.html). In the process, you'll dive into key concepts relevant to Web3 and start to cultivate an understanding for what it takes to build decentralized applications (dApps).
 
---> Add screenshot of home page
+![](./public/wallet-tutorial-screenshot.png)
 
 # 🧑‍💻 Getting started
 There are no formal blockchain or Web3 prerequisites for this tutorial, but you should have some experience with TypeScript and React. Having said that, you can certainly complete the tutorial if you at least know basic JavaScript. You just may find it more difficult to follow the app's pre-built functionality. 
