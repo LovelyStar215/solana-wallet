@@ -6,11 +6,7 @@ Under the hood, wallets leverage cryptographic technologies to generate or recov
 
 In this tutorial, you'll learn to develop a wallet for the [Solana](https://solana.com/) protocol. We will provide a simple Next.js application  that you will complete by leveraging Solana's JavaScript SDK, [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/index.html). In the process, you'll dive into key concepts relevant to Web3 and start to cultivate an understanding for what it takes to build decentralized applications (dApps).
 
-  |---------------------------|
-  |                           |
---|Add screenshot of home page|--
-  |                           |
-  |---------------------------|
+--> Add screenshot of home page
 
 # 🧑‍💻 Getting started
 There are no formal blockchain or Web3 prerequisites for this tutorial, but you should have some experience with TypeScript and React. Having said that, you can certainly complete the tutorial if you at least know basic JavaScript. You just may find it more difficult to follow the app's pre-built functionality. 
@@ -18,7 +14,7 @@ There are no formal blockchain or Web3 prerequisites for this tutorial, but you 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed. Then clone the repo and run the `yarn` command to install the app dependencies:
 
 ```
-git clone --add repo link here--
+git clone --> add repo link here
 cd wallet-tutorial
 yarn
 ```
@@ -52,35 +48,3 @@ Learn more about [Figment](https://figment.io/) and [Figment Learn](https://lear
 [Join us on Discord](https://discord.com/invite/fszyM7K) if you have any feedback or questions!
 
 -- The Figment Learn Team
-
-
-
-We made this decentralized application (dApp) to help developers learn about Web 3 protocols. It's a Next.js app that used React, TypeScript and various smart contract languages (mostly Solidity and Rust).
-
-We will guide you to build up a simple web client using the various blockchain's JavaScript SDKs to interact with their networks. Each protocol is slightly different, but we have attempted to standardize the workflow so that you can quickly get up to speed on networks like Solana, NEAR, Polygon and more!
-
-
-This is a Web 3 gateway tutorial app for Web 2 developers. It presents foundational dApp concepts by building a digital assets wallet for Solana.
-
-## Readme To Be Finalized
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying pages found in the `pages/` directory. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
