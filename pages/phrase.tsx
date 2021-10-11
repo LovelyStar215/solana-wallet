@@ -16,11 +16,15 @@ const Phrase: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Step 1: implement mnemonic functionality on mount
     const generatedMnemonic = Bip39.generateMnemonic();
     setMnemonic(generatedMnemonic);
+    // Have developer implement this line
     Bip39.mnemonicToSeed(generatedMnemonic)
-      .then((buffer) => {
-        const seed = new Uint8Array(buffer.toJSON().data.slice(0, 32));
+      .then((bytes) => {
+        // Explain this line but include it
+        const seed = new Uint8Array(bytes.toJSON().data.slice(0, 32));
+        // Have developer implement this line
         const newAccount = Keypair.fromSeed(seed);
         setAccount(newAccount);
       })
