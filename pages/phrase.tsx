@@ -16,16 +16,20 @@ const Phrase: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Step 1: implement mnemonic functionality on mount
+    // *Step 1*: implement a function that generates a mnemonic
+    // when the page renders, and uses it to create an account
+    // (a) generate a mnemonic phrase
     const generatedMnemonic = Bip39.generateMnemonic();
+    // This line saves the mnemonic phrase to context state so we can display it for the wallet user to copy
     setMnemonic(generatedMnemonic);
-    // Have developer implement this line
+    // (b) convert the mnemonic to seed bytes
     Bip39.mnemonicToSeed(generatedMnemonic)
       .then((bytes) => {
-        // Explain this line but include it
+        // This line creates a seed typed as an array of 8-bit unsigned integers
         const seed = new Uint8Array(bytes.toJSON().data.slice(0, 32));
-        // Have developer implement this line
+        // (c) use the seed to generate a new account (i.e. keypair)
         const newAccount = Keypair.fromSeed(seed);
+        // This line sets the account to context state so it can be used by the app
         setAccount(newAccount);
       })
       .catch((err) => {
