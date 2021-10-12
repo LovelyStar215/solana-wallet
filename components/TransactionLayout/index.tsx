@@ -58,20 +58,28 @@ const TransactionModal = () => {
     });
   };
 
+  // *Step 4*: implement a function that transfer funds
   const transfer = async () => {
+    // This line ensures the function returns before running if no account has been set
     if (!account) return;
 
+    // (a) instantiate a connection using clusterApiUrl with the active network
     const connection = new Connection(clusterApiUrl(network), "confirmed");
 
     try {
       setTransactionSig("");
 
+      // (b) leverage the SystemProgram class to create transfer instructions
+      // that includes your account's public key, the public key from your
+      // sender field in the form, and the amount from the form
       const instructions = SystemProgram.transfer({
         fromPubkey: account.publicKey,
         toPubkey: new PublicKey(form.to),
         lamports: form.amount,
       });
 
+      // (c) use your account to create a signers interface
+      // (note: signers is an array with an object with two properties)
       const signers = [
         {
           publicKey: account.publicKey,
@@ -79,10 +87,12 @@ const TransactionModal = () => {
         },
       ];
 
+      // (d) instantiate a transaction object and add the instructions
       const transaction = new Transaction().add(instructions);
 
       setSending(true);
 
+      // (e) send the transaction and await its confirmation
       const confirmation = await sendAndConfirmTransaction(
         connection,
         transaction,

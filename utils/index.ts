@@ -24,7 +24,7 @@ const refreshBalance = async (network: Cluster, account: Keypair | null) => {
 
 // *Step 3*: implement a function that airdrops SOL into devnet account
 const handleAirdrop = async (network: Cluster, account: Keypair | null) => {
-  // This line ensures the function returns if no account has been set
+  // This line ensures the function returns before running if no account has been set
   if (!account) return;
 
   try {
