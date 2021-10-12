@@ -6,16 +6,22 @@ import {
   Keypair,
 } from "@solana/web3.js";
 
+// *Step 2*: implement a function that gets an account's balance 
 const refreshBalance = async (network: Cluster, account: Keypair | null) => {
+  // (a) instantiate a connection using clusterApiUrl with the active network
   const connection = new Connection(clusterApiUrl(network), "confirmed");
+  // (b) get the key from the active account
   const publicKey = account?.publicKey;
   if (publicKey) {
+    // (c) get the account's balance from the connection instance
     const balance = await connection.getBalance(publicKey);
+    // (d) return the balance in SOL
     return balance / LAMPORTS_PER_SOL;
   } else {
     return 0;
   }
 };
+
 
 const handleAirdrop = async (network: Cluster, account: Keypair | null) => {
   if (!account) return;
