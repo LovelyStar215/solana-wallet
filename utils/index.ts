@@ -6,18 +6,26 @@ import {
   Keypair,
 } from "@solana/web3.js";
 
-// *Step 2*: implement a function that gets an account's balance 
+// *Step 2*: implement a function that gets an account's balance
 const refreshBalance = async (network: Cluster, account: Keypair | null) => {
-  // (a) instantiate a connection using clusterApiUrl with the active network
-  const connection = new Connection(clusterApiUrl(network), "confirmed");
-  // (b) get the key from the active account
-  const publicKey = account?.publicKey;
-  if (publicKey) {
+  if (!account) return;
+
+  try {
+    // (a) instantiate a connection using clusterApiUrl with the active network
+    const connection = new Connection(clusterApiUrl(network), "confirmed");
+    console.log(connection);
+    // console.log("Balance functionality not implemented yet!")
+    // const connection = "";
+    // (b) get the key from the active account
+    const publicKey = account.publicKey;
+    // const publicKey = "";
     // (c) get the account's balance from the connection instance
     const balance = await connection.getBalance(publicKey);
+    // const balance = 0
     // (d) return the balance in SOL
     return balance / LAMPORTS_PER_SOL;
-  } else {
+  } catch (error) {
+    console.log(error);
     return 0;
   }
 };
