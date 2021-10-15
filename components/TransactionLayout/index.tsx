@@ -63,10 +63,14 @@ const TransactionModal = () => {
     // This line ensures the function returns before running if no account has been set
     if (!account) return;
 
-    // (a) instantiate a connection using clusterApiUrl with the active network
-    const connection = new Connection(clusterApiUrl(network), "confirmed");
+    // For start:
+    // console.log("Sign and Send not yet implemented!")
+    // return
 
     try {
+      // (a) instantiate a connection using clusterApiUrl with the active network
+      const connection = new Connection(clusterApiUrl(network), "confirmed");
+      // const connection = "";
       setTransactionSig("");
 
       // (b) leverage the SystemProgram class to create transfer instructions
@@ -78,6 +82,13 @@ const TransactionModal = () => {
         lamports: form.amount,
       });
 
+      // (d) instantiate a transaction object and add the instructions
+      const transaction = new Transaction().add(instructions);
+      // const transaction = {};
+
+      // const instructions = {};
+      
+
       // (c) use your account to create a signers interface
       // (note: signers is an array with an object with two properties)
       const signers = [
@@ -87,8 +98,7 @@ const TransactionModal = () => {
         },
       ];
 
-      // (d) instantiate a transaction object and add the instructions
-      const transaction = new Transaction().add(instructions);
+      // const signers = [];
 
       setSending(true);
 
@@ -98,12 +108,16 @@ const TransactionModal = () => {
         transaction,
         signers
       );
+      // const confirmation = "";
 
       setTransactionSig(confirmation);
 
       setSending(false);
 
-      setBalance(await refreshBalance(network, account));
+      const updatedBalance = await refreshBalance(network, account)
+      // const updatedBalance = 0;
+
+      setBalance(updatedBalance);
       message.success(`Transaction confirmed`);
       console.log(confirmation);
     } catch (error) {
