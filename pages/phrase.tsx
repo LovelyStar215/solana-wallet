@@ -6,9 +6,9 @@ import { GlobalContext } from "../context";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
-// ***Completed:
-import * as Bip39 from "bip39";
-import { Keypair } from "@solana/web3.js";
+// Import Bip39 to generate a phrase and convert it to a seed:
+
+// Import the Keypair class from Solana's web3.js library:
 
 
 const Phrase: NextPage = () => {
@@ -19,24 +19,22 @@ const Phrase: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // *Step 1*: implement a function that generates a mnemonic
-    // when the page renders, and uses it to create an account
-    // (a) generate a mnemonic phrase by importing Bip39 and then implementing the appropriate method on the imported Bip39 instance
-
-    // ***Pre-built:
-    // const generatedMnemonic = "";
-    // ***Completed:
-    const generatedMnemonic = Bip39.generateMnemonic();
+    // *Step 1*: implement a function that generates a mnemonic when the page renders, and uses it to create an account
+    // (a) review the import guidance on lines 9 and 11
+    // (b) generate a mnemonic phrase by importing Bip39 and then implementing the appropriate method on the imported Bip39 instance
+    // Documentation Reference: https://github.com/bitcoinjs/bip39
+    const generatedMnemonic = "";
 
     // This line saves the mnemonic phrase to context state so we can display it for the wallet user to copy
     setMnemonic(generatedMnemonic);
-    
-    // ***Completed:
-    // (b) convert the mnemonic to seed bytes
-    const seed = Bip39.mnemonicToSeedSync(generatedMnemonic).slice(0, 32)
 
-    // (c) use the seed to generate a new account (i.e. keypair)
-    const newAccount = Keypair.fromSeed(seed);
+    // (c) convert the mnemonic to seed bytes
+    // Documentation Reference: https://github.com/bitcoinjs/bip39
+    const seed = new Uint8Array();
+
+    // (d) use the seed to generate a new account (i.e. a new keypair)
+    // Documentation Reference: https://solana-labs.github.io/solana-web3.js/
+    const newAccount = null;
 
     // This line sets the account to context state so it can be used by the app
     setAccount(newAccount);
