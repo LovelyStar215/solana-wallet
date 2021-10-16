@@ -20,18 +20,13 @@ const Recover: NextPage = () => {
     setLoading(true);
     const inputMnemonic = values.phrase.trim().toLowerCase();
     setMnemonic(inputMnemonic);
+
     // (a) convert the mnemonic to seed bytes
-    Bip39.mnemonicToSeed(inputMnemonic)
-      .then((bytes) => {
-        // This line creates a seed typed as an array of 8-bit unsigned integers
-        const seed = new Uint8Array(bytes.toJSON().data.slice(0, 32));
-        // (b) use the seed to import the account (i.e. keypair)
-        const importedAccount = Keypair.fromSeed(seed);
-        setAccount(importedAccount);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const seed = Bip39.mnemonicToSeedSync(inputMnemonic).slice(0, 32)
+
+    // (b) use the seed to import the account (i.e. keypair)
+    const importedAccount = Keypair.fromSeed(seed);
+    setAccount(importedAccount);
   };
 
   useEffect(() => {

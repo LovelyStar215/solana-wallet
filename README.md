@@ -1,5 +1,5 @@
 # Wallet Tutorial
-In this tutorial, you'll learn to develop a wallet for the [Solana](https://solana.com/) protocol. We will provide a simple Next.js application  that you will complete by leveraging Solana's JavaScript SDK, [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/index.html). In the process, you'll dive into key concepts relevant to Web3 and start to cultivate an understanding for what it takes to build decentralized applications (dApps).
+In this tutorial, you'll learn to develop a wallet for the [Solana](https://solana.com/) protocol. We will provide a simple Next.js application that you will complete by leveraging Solana's JavaScript SDK, [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/index.html). In the process, you'll dive into key concepts relevant to Web3 and start to cultivate an understanding for what it takes to build decentralized applications (dApps).
 
 ![](./public/wallet-tutorial-screenshot.png)
 

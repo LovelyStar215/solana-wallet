@@ -1,12 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import { NextPage } from "next";
-import { Keypair } from "@solana/web3.js";
 import { Button, Alert, Popconfirm } from "antd";
-import * as Bip39 from "bip39";
 import PhraseBox from "../components/PhraseBox";
 import { GlobalContext } from "../context";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+
+// ***Completed:
+import * as Bip39 from "bip39";
+import { Keypair } from "@solana/web3.js";
+
 
 const Phrase: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,23 +21,25 @@ const Phrase: NextPage = () => {
   useEffect(() => {
     // *Step 1*: implement a function that generates a mnemonic
     // when the page renders, and uses it to create an account
-    // (a) generate a mnemonic phrase
+    // (a) generate a mnemonic phrase by importing Bip39 and then implementing the appropriate method on the imported Bip39 instance
+
+    // ***Pre-built:
+    // const generatedMnemonic = "";
+    // ***Completed:
     const generatedMnemonic = Bip39.generateMnemonic();
+
     // This line saves the mnemonic phrase to context state so we can display it for the wallet user to copy
     setMnemonic(generatedMnemonic);
+    
+    // ***Completed:
     // (b) convert the mnemonic to seed bytes
-    Bip39.mnemonicToSeed(generatedMnemonic)
-      .then((bytes) => {
-        // This line creates a seed typed as an array of 8-bit unsigned integers
-        const seed = new Uint8Array(bytes.toJSON().data.slice(0, 32));
-        // (c) use the seed to generate a new account (i.e. keypair)
-        const newAccount = Keypair.fromSeed(seed);
-        // This line sets the account to context state so it can be used by the app
-        setAccount(newAccount);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const seed = Bip39.mnemonicToSeedSync(generatedMnemonic).slice(0, 32)
+
+    // (c) use the seed to generate a new account (i.e. keypair)
+    const newAccount = Keypair.fromSeed(seed);
+
+    // This line sets the account to context state so it can be used by the app
+    setAccount(newAccount);
   }, []);
 
   const showPopconfirm = () => {
