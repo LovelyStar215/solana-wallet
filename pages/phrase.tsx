@@ -19,7 +19,7 @@ const Phrase: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // *Step 2*: implement a function that generates a mnemonic when the page renders, and uses it to create an account
+    // *Step 2*: implement a function that generates a mnemonic when the page renders, and uses it to create a wallet (i.e. account)
     // (a) review the import guidance on lines 9 and 11
     // (b) generate a mnemonic phrase by importing Bip39 and then implementing the appropriate method on the imported Bip39 instance
     // Documentation Reference: https://github.com/bitcoinjs/bip39
