@@ -53,7 +53,7 @@ const TransactionModal = () => {
     });
   };
 
-  // *Step 4*: implement a function that transfer funds
+  // *Step 5*: implement a function that transfer funds
   const transfer = async () => {
     // This line ensures the function returns before running if no account has been set
     if (!account) return;
@@ -86,17 +86,13 @@ const TransactionModal = () => {
       const signers = [{}];
 
       setSending(true);
-
       // (f) send the transaction and await its confirmation
       // Documentation Reference: https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction
       const confirmation = "";
-
       setTransactionSig(confirmation);
-
       setSending(false);
 
       const updatedBalance = await refreshBalance(network, account);
-
       setBalance(updatedBalance);
       message.success(`Transaction confirmed`);
     } catch (error) {

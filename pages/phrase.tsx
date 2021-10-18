@@ -33,7 +33,9 @@ const Phrase: NextPage = () => {
     const seed = new Uint8Array();
 
     // (d) use the seed to generate a new account (i.e. a new keypair)
-    // Documentation Reference: https://solana-labs.github.io/solana-web3.js/
+    // Documentation Reference:
+    //   https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
+    //   https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#fromSeed
     const newAccount = null;
 
     // This line sets the account to context state so it can be used by the app
