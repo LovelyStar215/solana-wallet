@@ -18,7 +18,7 @@ const refreshBalance = async (network: Cluster, account: Keypair | null) => {
     console.log("Balance functionality not implemented yet!")
     const connection = "";
 
-    // (c) get the key using one of the accesors for active account
+    // (c) get the key using one of the accessors for active account
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
     const publicKey = "";
 
@@ -47,7 +47,7 @@ const handleAirdrop = async (network: Cluster, account: Keypair | null) => {
     console.log("Airdrop functionality not implemented yet!")
     const connection = "";
 
-    // (c) get the key using one of the accesors for active account
+    // (c) get the key using one of the accessors for active account
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
     const publicKey = "";
 
