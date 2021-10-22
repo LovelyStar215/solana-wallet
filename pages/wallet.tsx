@@ -5,14 +5,19 @@ import { GlobalContext } from "../context";
 import { useRouter } from "next/router";
 import TransactionLayout from "../components/TransactionLayout";
 import { refreshBalance, handleAirdrop } from "../utils";
-import { ArrowRightOutlined } from "@ant-design/icons";
-import { Dashboard, Airdrop, Question } from "../styles/StyledComponents.styles";
+import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  Dashboard,
+  Airdrop,
+  Question,
+} from "../styles/StyledComponents.styles";
 
 const { Paragraph } = Typography;
 
 const Wallet: NextPage = () => {
   const { network, account, balance, setBalance } = useContext(GlobalContext);
   const [visible, setVisible] = useState<boolean>(false);
+  const [airdropLoading, setAirdropLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -31,10 +36,12 @@ const Wallet: NextPage = () => {
   }, [account, router, network]);
 
   const airdrop = async () => {
+    setAirdropLoading(true);
     const updatedBalance = await handleAirdrop(network, account);
     if (typeof updatedBalance === "number") {
-      setBalance(updatedBalance)
+      setBalance(updatedBalance);
     }
+    setAirdropLoading(false);
   };
 
   const showModal = () => {
@@ -66,14 +73,19 @@ const Wallet: NextPage = () => {
               ? network.charAt(0).toUpperCase() + network.slice(1, 7)
               : network.charAt(0).toUpperCase() + network.slice(1)}
           </p>
-          <h2>
-            {balance} <span>SOL</span>
-          </h2>
+          {airdropLoading ? (
+            <h2>
+              <LoadingOutlined spin />
+            </h2>
+          ) : (
+            <h2>
+              {balance} <span>SOL</span>
+            </h2>
+          )}
+
           {network === "devnet" && account && (
             <>
-              <Airdrop onClick={airdrop}>
-                Airdrop
-              </Airdrop>
+              <Airdrop onClick={airdrop}>Airdrop</Airdrop>
               <Tooltip
                 title="Click to receive 1 devnet SOL into your account"
                 placement={"right"}
