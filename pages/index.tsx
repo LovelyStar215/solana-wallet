@@ -21,8 +21,8 @@ const Home: NextPage = () => {
       </HomeTitle>
 
       <HomeGrid>
-        <CreateAccount></CreateAccount>
-        <RestoreAccount></RestoreAccount>
+        <CreateAccount />
+        <RestoreAccount />
       </HomeGrid>
     </>
   );
