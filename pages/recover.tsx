@@ -10,7 +10,6 @@ import styled from "styled-components";
 
 // Import the Keypair class from Solana's web3.js library:
 
-
 const Recover: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
@@ -18,8 +17,10 @@ const Recover: NextPage = () => {
 
   const { account, setAccount, setMnemonic } = useContext(GlobalContext);
 
-  // *Step 6*: implement a function that recovers an account based on mnemonic
+  // *Step 6*: implement a function that recovers an account based on a mnemonic phrase
   const handleImport = async (values: any) => {
+    console.log("Recovery functionality not implemented yet!");
+
     setLoading(true);
     const inputMnemonic = values.phrase.trim().toLowerCase();
     setMnemonic(inputMnemonic);
@@ -35,6 +36,8 @@ const Recover: NextPage = () => {
     //   https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#fromSeed
     const importedAccount = null;
     setAccount(importedAccount);
+
+    // (d) You can now delete the console.log statement since the function is implemented!
   };
 
   useEffect(() => {
@@ -111,6 +114,6 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export default Recover;

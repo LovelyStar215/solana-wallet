@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 
 // Import the Keypair class from Solana's web3.js library:
 
-
 const Phrase: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
@@ -28,7 +27,7 @@ const Phrase: NextPage = () => {
     // This line saves the mnemonic phrase to context state so we can display it for the wallet user to copy
     setMnemonic(generatedMnemonic);
 
-    // (c) convert the mnemonic to seed bytes
+    // (c) convert the mnemonic to seed bytes and make sure it's 32-bytes (Hint: console log the seed to see how many bytes you have vs how many you need)
     // Documentation Reference: https://github.com/bitcoinjs/bip39
     const seed = new Uint8Array();
 

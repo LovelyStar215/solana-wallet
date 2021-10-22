@@ -2,9 +2,7 @@
 import React, { useState, useContext } from "react";
 import { message } from "antd";
 import { GlobalContext } from "../../context";
-import {
-  LAMPORTS_PER_SOL,
-} from "@solana/web3.js";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
 import { refreshBalance } from "../../utils";
@@ -60,7 +58,7 @@ const TransactionModal = () => {
 
     try {
       // (a) review the import guidance on line 1
-      // (b) instantiate a connection using clusterApiUrl with the active network
+      // (b) instantiate a connection using clusterApiUrl with the active network passed in as an argument
       // Documentation References:
       //   https://solana-labs.github.io/solana-web3.js/classes/Connection.html
       //   https://solana-labs.github.io/solana-web3.js/modules.html#clusterApiUrl
@@ -95,6 +93,7 @@ const TransactionModal = () => {
       const updatedBalance = await refreshBalance(network, account);
       setBalance(updatedBalance);
       message.success(`Transaction confirmed`);
+      // (g) You can now delete the console.log statement since the function is implemented!
     } catch (error) {
       console.log(error);
       message.error(

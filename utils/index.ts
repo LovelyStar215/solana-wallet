@@ -1,8 +1,5 @@
 // Import any additional classes and/or functions needed from Solana's web3.js library as you go along:
-import {
-  Cluster,
-  Keypair,
-} from "@solana/web3.js";
+import { Cluster, Keypair } from "@solana/web3.js";
 
 // *Step 3*: implement a function that gets an account's balance
 const refreshBalance = async (network: Cluster, account: Keypair | null) => {
@@ -11,22 +8,23 @@ const refreshBalance = async (network: Cluster, account: Keypair | null) => {
 
   try {
     // (a) review the import guidance on line 1
-    // (b) instantiate a connection using clusterApiUrl with the active network
+    // (b) instantiate a connection using clusterApiUrl with the active network passed in as an argument
     // Documentation References:
     //   https://solana-labs.github.io/solana-web3.js/classes/Connection.html
     //   https://solana-labs.github.io/solana-web3.js/modules.html#clusterApiUrl
-    console.log("Balance functionality not implemented yet!")
+    console.log("Balance functionality not implemented yet!");
     const connection = "";
 
-    // (c) get the key using one of the accessors for active account
+    // (c) get the key using one of the accessors on the account passed in as an argument
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
     const publicKey = "";
 
     // (d) get the account's balance using the connection instance
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Connection.html
-    const balance = 0
+    const balance = 0;
 
-    return balance
+    return balance;
+    // (e) You can now delete the console.log statement since the function is implemented!
   } catch (error) {
     console.log(error);
     return 0;
@@ -40,30 +38,31 @@ const handleAirdrop = async (network: Cluster, account: Keypair | null) => {
 
   try {
     // (a) review the import guidance on line 1
-    // (b) instantiate a connection using clusterApiUrl with the active network
+    // (b) instantiate a connection using clusterApiUrl with the active network passed in as an argument
     // Documentation References:
     //   https://solana-labs.github.io/solana-web3.js/classes/Connection.html
     //   https://solana-labs.github.io/solana-web3.js/modules.html#clusterApiUrl
-    console.log("Airdrop functionality not implemented yet!")
+    console.log("Airdrop functionality not implemented yet!");
     const connection = "";
 
-    // (c) get the key using one of the accessors for active account
+    // (c) get the key using one of the accessors on the account passed in as an argument
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Keypair.html
     const publicKey = "";
 
     // (d) request the airdrop using the connection instance
     // Note that you should include the amount to airdrop (consider using the LAMPORTS_PER_SOL constant from the web3.js library)
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Connection.html
-    const confirmation = ""
+    const confirmation = "";
 
     // (d) confirm the transaction using the connection instance and the confirmation string returned from the airdrop
     // Documentation Reference: https://solana-labs.github.io/solana-web3.js/classes/Connection.html
-    const result = ""
+    const result = "";
 
-    // (e) Refactor the refreshBalance function to return balances in SOL instead of Lamports
+    // (e) Refactor the refreshBalance function to return balances in SOL instead of Lamports (Hint: LAMPORTS_PER_SOL)
 
     // This line returns the balance after the airdrop so the UI can be refreshed
     return await refreshBalance(network, account);
+    // (f) You can now delete the console.log statement since the function is implemented!
   } catch (error) {
     console.log(error);
     return;
