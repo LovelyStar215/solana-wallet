@@ -1,7 +1,7 @@
 // Import any additional classes and/or functions needed from Solana's web3.js library as you go along:
-import React, { useState, useContext } from "react";
+import React, { useState, ReactElement } from "react";
 import { message } from "antd";
-import { GlobalContext } from "../../context";
+import { useGlobalState } from "../../context";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 const converter = require("number-to-words");
 import { LoadingOutlined } from "@ant-design/icons";
@@ -33,8 +33,8 @@ const defaultForm: FormT = {
   isSigned: false,
 };
 
-const TransactionModal = () => {
-  const { network, account, balance, setBalance } = useContext(GlobalContext);
+const TransactionModal = (): ReactElement => {
+  const { network, account, balance, setBalance } = useGlobalState();
   const [form, setForm] = useState<FormT>(defaultForm);
   const [sending, setSending] = useState<boolean>(false);
   const [transactionSig, setTransactionSig] = useState<string>("");
@@ -90,14 +90,17 @@ const TransactionModal = () => {
       setTransactionSig(confirmation);
       setSending(false);
 
-      const updatedBalance = await refreshBalance(network, account);
-      setBalance(updatedBalance);
-      message.success(`Transaction confirmed`);
+      if (network) {
+        const updatedBalance = await refreshBalance(network, account);
+        setBalance(updatedBalance);
+        message.success(`Transaction confirmed`);
+      }
       // (g) You can now delete the console.log statement since the function is implemented!
     } catch (error) {
-      console.log(error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown Error";
       message.error(
-        "Transaction failed, please check your inputs and try again"
+        `Transaction failed, please check your inputs: ${errorMessage}`
       );
     }
   };
@@ -145,6 +148,7 @@ const TransactionModal = () => {
           <SignatureInput
             onClick={transfer}
             disabled={
+              !balance ||
               form.amount / LAMPORTS_PER_SOL > balance ||
               !form.to ||
               form.amount == 0

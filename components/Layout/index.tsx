@@ -1,5 +1,5 @@
 import { Badge, Dropdown, Menu, Divider } from "antd";
-import React, { BaseSyntheticEvent, useContext } from "react";
+import React, { BaseSyntheticEvent, ReactElement } from "react";
 import {
   DownOutlined,
   UserOutlined,
@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "./index.module.css";
-import { GlobalContext } from "../../context";
+import { useGlobalState } from "../../context";
 import { useRouter } from "next/router";
 import { Cluster } from "@solana/web3.js";
 
@@ -19,9 +19,9 @@ type DomEvent = {
   keyPath: Array<string>;
 };
 
-const Layout = ({ children }: { children: JSX.Element }) => {
+const Layout = ({ children }: { children: JSX.Element }): ReactElement => {
   const { network, setNetwork, account, setAccount, setBalance, setMnemonic } =
-    useContext(GlobalContext);
+    useGlobalState();
 
   const router = useRouter();
 

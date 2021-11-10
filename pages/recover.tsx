@@ -1,8 +1,8 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Form, Input, Button } from "antd";
-import { GlobalContext } from "../context";
+import { useGlobalState } from "../context";
 import { LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 
@@ -15,7 +15,7 @@ const Recover: NextPage = () => {
   const [form] = Form.useForm();
   const router = useRouter();
 
-  const { account, setAccount, setMnemonic } = useContext(GlobalContext);
+  const { account, setAccount, setMnemonic } = useGlobalState();
 
   // *Step 6*: implement a function that recovers an account based on a mnemonic phrase
   const handleImport = async (values: any) => {

@@ -1,15 +1,15 @@
-import { createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { Keypair, Cluster } from "@solana/web3.js";
 
 export type GlobalContextType = {
-  network: Cluster;
-  setNetwork: (network: Cluster) => void;
+  network: Cluster | undefined;
+  setNetwork: React.Dispatch<React.SetStateAction<Cluster | undefined>>;
   account: Keypair | null;
-  setAccount: (account: Keypair | null) => void;
-  mnemonic: string;
-  setMnemonic: (mnemonic: string) => void;
-  balance: number;
-  setBalance: (balance: number) => void;
+  setAccount: React.Dispatch<React.SetStateAction<Keypair | null>>;
+  mnemonic: string | null;
+  setMnemonic: React.Dispatch<React.SetStateAction<string | null>>;
+  balance: number | null;
+  setBalance: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 export const GlobalContext = createContext<GlobalContextType>({
@@ -17,9 +17,9 @@ export const GlobalContext = createContext<GlobalContextType>({
   setNetwork: () => null,
   account: null,
   setAccount: () => null,
-  mnemonic: "",
+  mnemonic: null,
   setMnemonic: () => null,
-  balance: 0,
+  balance: null,
   setBalance: () => null,
 });
 

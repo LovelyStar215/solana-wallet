@@ -7,10 +7,10 @@ import { GlobalContext } from "../context";
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [network, setNetwork] = useState<Cluster>("devnet");
+  const [network, setNetwork] = useState<Cluster | undefined>("devnet");
   const [account, setAccount] = useState<Keypair | null>(null);
-  const [mnemonic, setMnemonic] = useState<string>("");
-  const [balance, setBalance] = useState<number>(0);
+  const [mnemonic, setMnemonic] = useState<string | null>(null);
+  const [balance, setBalance] = useState<number | null>(null);
 
   return (
     <GlobalContext.Provider value={{ network, setNetwork, account, setAccount, mnemonic, setMnemonic, balance, setBalance }}>

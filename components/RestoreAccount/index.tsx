@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import { Button } from "antd";
 import { LoadingOutlined, UnlockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Card } from "../../styles/StyledComponents.styles";
 
-const RestoreAccount = () => {
+const RestoreAccount = (): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {

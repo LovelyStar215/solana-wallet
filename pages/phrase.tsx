@@ -1,8 +1,8 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Button, Alert, Popconfirm } from "antd";
 import PhraseBox from "../components/PhraseBox";
-import { GlobalContext } from "../context";
+import { useGlobalState } from "../context";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 const Phrase: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const { setAccount, mnemonic, setMnemonic } = useContext(GlobalContext);
+  const { setAccount, mnemonic, setMnemonic } = useGlobalState();
 
   const router = useRouter();
 
