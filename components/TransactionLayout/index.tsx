@@ -102,6 +102,7 @@ const TransactionModal = (): ReactElement => {
       message.error(
         `Transaction failed, please check your inputs: ${errorMessage}`
       );
+      setSending(false);
     }
   };
 
