@@ -14,10 +14,10 @@ import {
 
 const { Paragraph } = Typography;
 
-const Wallet: NextPage = () => {
+const Wallet = () => {
   const { network, account, balance, setBalance } = useGlobalState();
-  const [visible, setVisible] = useState<boolean>(false);
-  const [airdropLoading, setAirdropLoading] = useState<boolean>(false);
+  const [visible, setVisible] = useState(false);
+  const [airdropLoading, setAirdropLoading] = useState(false);
 
   const router = useRouter();
 
@@ -52,7 +52,7 @@ const Wallet: NextPage = () => {
     setVisible(false);
   };
 
-  const displayAddress = (address: string) =>
+  const displayAddress = (address) =>
     `${address.slice(0, 4)}...${address.slice(-4)}`;
 
   return (
